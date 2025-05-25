@@ -13,22 +13,42 @@
             color: #333;
         }
 
+        /* Estilos para el contenedor del título principal (IDSEEM) */
+        .site-title-container {
+            background-color: #fff; /* Fondo blanco para el área del título */
+            padding: 30px 0; /* Más espacio vertical para que destaque */
+            text-align: center; /* Centra el texto horizontalmente */
+            border-bottom: 1px solid #ddd; /* Línea sutil debajo del título */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Sombra suave para profesionalismo */
+        }
+
+        .site-title {
+            margin: 0;
+            font-size: 3em; /* Tamaño grande para la marca */
+            color: #007bff; /* Un azul vibrante que usas en el sitio */
+            font-weight: 800; /* Extra bold para mayor impacto */
+            letter-spacing: 0.15em; /* Mayor espacio entre letras para un estilo moderno */
+            text-transform: uppercase; /* Convertir a mayúsculas para un look de marca */
+            /* Puedes añadir una sombra de texto si quieres un efecto 3D sutil: */
+            /* text-shadow: 1px 1px 2px rgba(0,0,0,0.1); */
+        }
+
         /* Estilos para la barra de navegación */
         .navbar {
             background-color: #333;
             color: white;
-            padding: 15px 20px;
+            padding: 10px 20px;
             display: flex;
-            justify-content: flex-start; /* Alinea los elementos a la izquierda */
+            justify-content: center; /* Centra los elementos de la navegación */
             align-items: center;
         }
 
         .navbar a {
             color: white;
             text-decoration: none;
-            margin-right: 20px;
+            margin: 0 15px; /* Espacio entre los enlaces de navegación */
             font-weight: bold;
-            font-size: 1em;
+            font-size: 1.1em; /* Un poco más grandes los enlaces */
             transition: color 0.3s ease;
         }
 
@@ -104,17 +124,16 @@
             color: #0056b3;
         }
 
-
         .header {
-            background-color: #fff;
-            padding: 20px;
+            background-color: #f8f9fa; /* Fondo más claro para la sección de subtítulo */
+            padding: 15px 20px;
             text-align: center;
             border-bottom: 1px solid #ddd;
         }
 
         .header h1 {
             margin: 0;
-            font-size: 2em;
+            font-size: 1.8em; /* Reduje un poco el tamaño del título principal */
             color: #007bff;
         }
 
@@ -268,6 +287,10 @@
 </head>
 <body>
 
+    <div class="site-title-container">
+        <h1 class="site-title">IDSEEM</h1>
+    </div>
+
     <div class="navbar">
         <a href="#" id="home-link">INICIO</a>
         <a href="#" id="about-us-link">SOBRE NOSOTROS</a>
@@ -285,7 +308,7 @@
     <div class="projects-grid">
         <div class="project-card">
             <div class="project-image-container">
-                <img src="https://i.pinimg.com/736x/f4/0c/da/f40cda0263b58733d570859c215bd532.jpg" alt="Máquina CNC de Alta Precisión" class="project-image" />
+                <img src="https://i.pinimg.com/73x/f4/0c/da/f40cda0263b58733d570859c215bd532.jpg" alt="Máquina CNC de Alta Precisión" class="project-image" />
             </div>
             <div class="project-info">
                 <h2 class="project-title">CNC de Alta Precisión</h2>
@@ -317,7 +340,7 @@
 
         <div class="project-card">
             <div class="project-image-container">
-                <img src="https://i.pinimg.com/736x/cf/a7/df/cfa7dfa7118df61cb7e1ed4ab6d9aea9.jpg" alt="Diseño conceptual de investigación y desarrollo" class="project-image" />
+                <img src="https://i.pinimg.com/73x/cf/a7/df/cfa7dfa7118df61cb7e1ed4ab6d9aea9.jpg" alt="Diseño conceptual de investigación y desarrollo" class="project-image" />
             </div>
             <div class="project-info">
                 <h2 class="project-title">I+D de Contenido DIY: Nuevas Guías y Exploraciones</h2>
