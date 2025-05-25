@@ -1,0 +1,475 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyectos Innovadores en Crowdfunding</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Estilos para la barra de navegación */
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: flex-start; /* Alinea los elementos a la izquierda */
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+            font-size: 1em;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #007bff;
+        }
+
+        /* Estilos para el contenedor de mensajes (para "Sobre Nosotros" y "Contacto") */
+        .message-container {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 0; /* padding inicial en 0 para la transición */
+            margin: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* Ocultar el contenido desbordante para la transición */
+            max-height: 0; /* Ocultar inicialmente y permitir la transición */
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out; /* Transición para altura y padding */
+        }
+
+        .message-container.show {
+            max-height: 400px; /* Ajustado para asegurar que el contenido del mensaje de contacto sea visible */
+            padding: 20px; /* Asegura que el padding se aplique cuando se muestra */
+        }
+        
+        /* Estilo específico para los mensajes */
+        .message-container h1, .message-container h2 {
+            color: #007bff;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .message-container p {
+            text-align: justify; /* Justificar el texto para mejor lectura */
+            margin-bottom: 0;
+        }
+
+        /* Nuevos estilos para el contenido de contacto */
+        .contact-content {
+            padding: 10px;
+            text-align: center; /* Centrar el texto dentro del contenedor de contacto */
+        }
+
+        .contact-content address {
+            font-style: normal; /* Eliminar la cursiva predeterminada de address */
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+
+        .contact-content ul {
+            list-style: none; /* Quitar viñetas de la lista */
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .contact-content li {
+            margin-bottom: 8px;
+        }
+
+        .contact-content strong {
+            color: #555;
+        }
+
+        .contact-content a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-content a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+
+
+        .header {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2em;
+            color: #007bff;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .project-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-image-container {
+            width: 100%;
+            height: 200px; /* Altura fija para mantener la consistencia */
+            overflow: hidden;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cubrir el contenedor sin distorsionar la imagen */
+            display: block;
+        }
+
+        .project-info {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; /* Para que la información ocupe el espacio restante */
+        }
+
+        .project-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .project-creator {
+            font-style: italic;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .project-description {
+            color: #555;
+            margin-bottom: 15px;
+            flex-grow: 1; /* Para empujar el botón hacia abajo */
+        }
+
+        .progress-bar-container {
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            height: 10px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background-color: #007bff;
+            height: 100%;
+            width: 0%; /* Se actualizará con el porcentaje real */
+            border-radius: 5px;
+        }
+
+        .progress-text {
+            font-size: 0.9em;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .support-button {
+            background-color: #007bff;
+            color: white !important; /* ¡Añadimos !important para forzar el color blanco */
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            display: block; /* Para que el enlace ocupe todo el botón */
+            text-decoration: none; /* Ocultar el subrayado del enlace */
+        }
+
+        .support-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilos específicos para el segundo proyecto (Yate) */
+        .project-card:nth-child(2) .progress-bar {
+            width: 80%; /* Ejemplo Yate */
+        }
+
+        /* Estilos para la sección de Patrocinadores */
+        .sponsors-section {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .sponsors-section h2 {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .sponsors-list {
+            display: block; /* Cambiado a block para lista vertical */
+            text-align: center; /* Centrar los elementos de la lista */
+        }
+
+        .sponsor-item {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px; /* Añadir espacio entre los nombres */
+            display: block; /* Asegurar que cada nombre ocupe una línea */
+        }
+
+        /* Estilos para los proyectos de abajo */
+        .project-card:nth-child(3) .progress-bar {
+            width: 30%; /* Ejemplo I+D */
+        }
+
+        .project-card:nth-child(4) .progress-bar {
+            width: 45%; /* Ejemplo Placas */
+        }
+
+        /* Estilos para los nuevos proyectos */
+        .project-card:nth-child(5) .progress-bar {
+            width: 70%; /* Ejemplo Impresoras 3D */
+        }
+
+        .project-card:nth-child(6) .progress-bar {
+            width: 55%; /* Ejemplo Drones */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="#" id="home-link">INICIO</a>
+        <a href="#" id="about-us-link">SOBRE NOSOTROS</a>
+        <a href="#" id="contact-link">CONTACTO</a>
+    </div>
+
+    <div class="message-container" id="dynamic-message-content">
+    </div>
+
+    <div class="header">
+        <h1>Proyectos Innovadores en Crowdfunding</h1>
+        <p>Descubre y apoya ideas que están transformando el mundo.</p>
+    </div>
+
+    <div class="projects-grid">
+        <div class="project-card">
+            <div class="project-image-container">
+                <img src="https://i.pinimg.com/736x/f4/0c/da/f40cda0263b58733d570859c215bd532.jpg" alt="Máquina CNC de Alta Precisión" class="project-image" />
+            </div>
+            <div class="project-info">
+                <h2 class="project-title">CNC de Alta Precisión</h2>
+                <p class="project-creator">Por Expertos en Manufactura</p>
+                <p class="project-description">Financiando la próxima generación de máquinas CNC para prototipado rápido y producción a medida.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: 65%;"></div>
+                </div>
+                <p class="progress-text">65% Financiado ($65,000 de $100,000)</p>
+                <a href="https://www.paypal.com/ncp/payment/X5MHT62ZGVEPA" target="_blank" class="support-button">Apoyar este Proyecto</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image-container">
+                <img src="https://i.pinimg.com/236x/12/07/8e/12078eeec5c377877b827322c6349832.jpg" alt="Yate Turístico de Lujo" class="project-image" />
+            </div>
+            <div class="project-info">
+                <h2 class="project-title">Yate Turístico de Lujo</h2>
+                <p class="project-creator">Por Navegantes Visionarios</p>
+                <p class="project-description">Construyendo un yate ecológico con materiales reciclados y energía solar para una navegación responsable.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: 80%;"></div>
+                </div>
+                <p class="progress-text">80% Financiado ($800,000 de $1,000,000)</p>
+                <a href="https://www.paypal.com/ncp/payment/Y67N4MGRWPF2E" target="_blank" class="support-button">Apoyar este Proyecto</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image-container">
+                <img src="https://i.pinimg.com/736x/cf/a7/df/cfa7dfa7118df61cb7e1ed4ab6d9aea9.jpg" alt="Diseño conceptual de investigación y desarrollo" class="project-image" />
+            </div>
+            <div class="project-info">
+                <h2 class="project-title">I+D de Contenido DIY: Nuevas Guías y Exploraciones</h2>
+                <p class="project-creator">Por Johnny A.V.</p>
+                <p class="project-description">Apoya la investigación y el desarrollo de nuevo contenido educativo DIY, explorando nuevas técnicas, efectos visuales y aplicaciones innovadoras para proyectos como los chorros de agua iluminados con láser y otros emocionantes experimentos creativos.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: 30%;"></div>
+                </div>
+                <p class="progress-text">30% Financiado ($4,500 de $15,000)</p>
+                <a href="https://www.paypal.com/ncp/payment/7AZX34AVZPCD2" target="_blank" class="support-button">Apoyar I+D de Contenido</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image-container">
+                <img src="https://i.pinimg.com/73x/07/d1/9d/07d19de9977f03531a7e93c6c8a97a6a.jpg" alt="Placa de circuito impreso con componentes electrónicos" class="project-image" />
+            </div>
+            <div class="project-info">
+                <h2 class="project-title">Fabricación de Placas Electrónicas DIY</h2>
+                <p class="project-creator">Por Innovadores en Electrónica</p>
+                <p class="project-description">Financia la creación de herramientas, guías y recursos para facilitar la fabricación de placas electrónicas personalizadas para proyectos DIY, desde prototipos hasta producciones a pequeña escala.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: 45%;"></div>
+                </div>
+                <p class="progress-text">45% Financiado ($9,000 de $20,000)</p>
+                <a href="https://www.paypal.com/ncp/payment/X8VA3LP2V9A76" target="_blank" class="support-button">Apoyar Fabricación de Placas</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image-container">
+                <img src="https://s.alicdn.com/@sc04/kf/H28c0c5597fab4647826da24f72242b793.jpg_720x720q50.jpg" alt="Impresoras 3D de gran formato" class="project-image" />
+            </div>
+            <div class="project-info">
+                <h2 class="project-title">Impresoras 3D de gran formato</h2>
+                <p class="project-creator">Por Makers Industriales</p>
+                <p class="project-description">Apoya el desarrollo de impresoras 3D de gran formato para la producción de piezas a escala industrial con alta precisión.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: 70%;"></div>
+                </div>
+                <p class="progress-text">70% Financiado ($70,000 de $100,000)</p>
+                <a href="https://www.paypal.com/ncp/payment/9FGBXZFXFD884" target="_blank" class="support-button">Apoyar Impresoras 3D</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image-container">
+                <img src="https://s.alicdn.com/@sc04/kf/H5ebdcde46919408ead6c32e79262079a8.png_720x720q50.jpg" alt="Drones agrícolas de gran formato" class="project-image" />
+            </div>
+            <div class="project-info">
+                <h2 class="project-title">Drones agrícolas de gran formato</h2>
+                <p class="project-creator">Por Agrotech Innovación</p>
+                <p class="project-description">Financiando drones agrícolas de gran formato para la monitorización de cultivos, fumigación eficiente y análisis de datos para la agricultura de precisión.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: 55%;"></div>
+                </div>
+                <p class="progress-text">55% Financiado ($55,000 de $100,000)</p>
+                <a href="https://www.paypal.com/ncp/payment/SNDNX5SFQUH8W" target="_blank" class="support-button">Apoyar Drones Agrícolas</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="sponsors-section">
+        <h2>Nuestros Patrocinadores</h2>
+        <div class="sponsors-list">
+            <span class="sponsor-item">Solofibra</span>
+            <span class="sponsor-item">Torneria FREDMEN</span>
+            <span class="sponsor-item">Operadora de turismo Yatell</span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const homeLink = document.getElementById('home-link');
+            const aboutUsLink = document.getElementById('about-us-link');
+            const contactLink = document.getElementById('contact-link');
+            const dynamicMessageContent = document.getElementById('dynamic-message-content');
+
+            // Define the content for each section
+            const aboutUsText = `
+                <h2>Sobre Nosotros </h2>
+                <p>El Corazón que Impulsa tus Proyectos. En el núcleo de esta plataforma de crowdfunding se encuentra un equipo gestor apasionado y multidisciplinario, unido por la firme creencia en el poder de la colaboración y la innovación. Somos un grupo de profesionales con experiencia diversa en áreas cruciales para el éxito de cualquier proyecto, desde la planificación estratégica y la gestión de campañas hasta la tecnología web, el marketing digital y la construcción de comunidades sólidas.</p>
+            `;
+
+            // Contenido de contacto actualizado con tu número y correo
+            const contactText = `
+                <div class="contact-content">
+                    <h2>Contacto</h2>
+                    <p>¡Nos encantaría saber de ti! Puedes contactarnos a través de:</p>
+                    <address>
+                        <ul>
+                            <li><strong>Email:</strong> <a href="mailto:jaavjohnny@gmail.com">jaavjohnny@gmail.com</a></li>
+                            <li><strong>Teléfono:</strong> <a href="tel:+593990521316">099 052 1316</a></li>
+                        </ul>
+                    </address>
+                    <p>Tu mensaje es importante para nosotros y responderemos lo antes posible.</p>
+                </div>
+            `;
+
+            // Function to close the message container
+            function closeMessageContainer() {
+                if (dynamicMessageContent.classList.contains('show')) {
+                    dynamicMessageContent.classList.remove('show');
+                    // Clear content after transition for a cleaner state
+                    setTimeout(() => {
+                        dynamicMessageContent.innerHTML = '';
+                    }, 500); // Match this with your CSS transition duration
+                }
+            }
+
+            // Function to set content and toggle visibility
+            function toggleMessage(contentToShow) {
+                const isCurrentlyShowing = dynamicMessageContent.classList.contains('show');
+                const currentContent = dynamicMessageContent.innerHTML.trim();
+
+                // Check if the same content is already showing
+                if (isCurrentlyShowing && currentContent === contentToShow.trim()) {
+                    closeMessageContainer(); // If it's the same, close it
+                } else {
+                    // If something else is showing, or nothing is showing,
+                    // first hide it (if visible) then show the new content
+                    if (isCurrentlyShowing) {
+                        dynamicMessageContent.classList.remove('show');
+                        setTimeout(() => { // Delay setting new content until after hide transition
+                            dynamicMessageContent.innerHTML = contentToShow;
+                            dynamicMessageContent.classList.add('show');
+                        }, 500); // Match CSS transition duration
+                    } else {
+                        // If nothing is showing, just set content and show
+                        dynamicMessageContent.innerHTML = contentToShow;
+                        dynamicMessageContent.classList.add('show');
+                    }
+                }
+            }
+
+            // --- Event Listeners ---
+            homeLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
+                closeMessageContainer(); // Close any open message
+            });
+
+            aboutUsLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
+                toggleMessage(aboutUsText);
+            });
+
+            contactLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
+                toggleMessage(contactText);
+            });
+        });
+    </script>
+</body>
+</html>
