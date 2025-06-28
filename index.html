@@ -1,492 +1,917 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyectos Innovadores en Crowdfunding</title>
+    <title>Súper Conversor y Nuestros Productos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&amp;family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap'); /* Importa una fuente bold y moderna para el logo */
-
+        /* Estilos Generales para el body y reseteos */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-
-        /* Estilos para el logo IDSEEM */
-        .logo-container {
-            text-align: center;
-            padding: 20px 0;
-            background-color: #f4f4f4; /* Mantiene el color de fondo para la continuidad */
-        }
-
-        .logo-container h1 {
-            font-family: 'Montserrat', sans-serif; /* Aplica la fuente importada */
-            font-size: 4em; /* ¡HECHO! ESTE VALOR HACE LA LETRA MUCHO MÁS GRANDE */
-            color: #007bff; /* Un color azul llamativo */
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Opcional: añade una sombra sutil */
-            letter-spacing: 3px; /* Opcional: ajusta el espaciado entre letras */
-        }
-
-        /* Estilos para la barra de navegación */
-        .navbar {
-            background-color: #333;
-            color: white;
-            padding: 15px 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #F5F7FA; /* Fondo principal para toda la página */
+            color: #333333;
             display: flex;
-            justify-content: flex-start; /* Alinea los elementos a la izquierda */
-            align-items: center;
+            flex-direction: column; /* Apila los elementos verticalmente */
+            align-items: center; /* Centra los elementos */
+            min-height: 100vh;
         }
 
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin-right: 20px;
-            font-weight: bold;
-            font-size: 1em;
-            transition: color 0.3s ease;
+        /* Estilos de la Calculadora - Adaptados para coexistir */
+        .calculator {
+            --primary-bg: #F5F7FA; /* Light background */
+            --secondary-bg: #FFFFFF; /* Card background */
+            --text-color: #333333; /* Dark text */
+            --accent-color: #007BFF; /* Blue accent */
+            --accent-hover: #0056b3; /* Darker blue for hover */
+            --border-color: #E0E0E0; /* Light border */
+            --shadow-color: rgba(0, 0, 0, 0.08); /* Subtle shadow */
+            --steps-bg: #E8F0FE; /* Light blue for steps background */
+            --remainder-color: #dc3545; /* Red for remainders */
+            --quotient-color: #007bff; /* Blue for quotients */
+            --fractional-integer-color: #6f42c1; /* Purple for fractional integers */
+
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            padding: 30px;
+            width: 100%;
+            max-width: 550px;
+            box-sizing: border-box;
+            text-align: center;
+            margin-bottom: 20px; /* Reducido para que el mensaje quede más cerca */
         }
 
-        .navbar a:hover {
-            color: #007bff;
+        .calculator h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            letter-spacing: 0.5px;
         }
 
-        /* Estilos para el contenedor de mensajes (para "Sobre Nosotros" y "Contacto") */
-        .message-container {
-            background-color: #fff;
-            border: 1px solid #ddd;
+        #conversion-options {
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+            gap: 20px;
+        }
+
+        #conversion-options label {
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            cursor: pointer;
+            position: relative;
+            padding-left: 25px;
+            transition: color 0.2s ease;
+        }
+
+        #conversion-options input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        #conversion-options label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 18px;
+            width: 18px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            background-color: var(--secondary-bg);
+            transition: all 0.2s ease;
+        }
+
+        #conversion-options input[type="radio"]:checked + label::before {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        #conversion-options input[type="radio"]:checked + label::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 8px;
+            width: 8px;
+            border-radius: 50%;
+            background-color: var(--secondary-bg);
+            opacity: 1;
+            transition: all 0.2s ease;
+        }
+
+        #decimalNumberInput {
+            width: calc(100% - 150px); /* Ajuste para escritorio */
+            padding: 12px 15px;
+            margin-right: 10px;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 0; /* padding inicial en 0 para la transición */
-            margin: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            overflow: hidden; /* Ocultar el contenido desbordante para la transición */
-            max-height: 0; /* Ocultar inicialmente y permitir la transición */
-            transition: max-height 0.5s ease-out, padding 0.5s ease-out; /* Transición para altura y padding */
+            font-size: 1.1em;
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
+            max-width: 250px; /* Limita el ancho en pantallas grandes */
         }
 
-        .message-container.show {
-            max-height: 300px; /* Incrementado para asegurar que el contenido de contacto se vea */
-            padding: 20px; /* Asegura que el padding se aplique cuando se muestra */
+        #decimalNumberInput:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
         }
-        
-        /* Estilo específico para los mensajes */
-        .message-container h1, .message-container h2 {
-            color: #007bff;
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            outline: none;
+            margin-left: 5px; /* Espacio entre botones en escritorio */
+        }
+
+        button:first-of-type {
+            background-color: var(--accent-color);
+            color: var(--secondary-bg);
+        }
+
+        button:first-of-type:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+        }
+
+        button:nth-of-type(2) {
+            background-color: var(--border-color);
+            color: var(--text-color);
+        }
+
+        button:nth-of-type(2):hover {
+            background-color: #d1d1d1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #toggleSpeechBtn {
+            background-color: #28a745;
+            color: white;
+            margin-top: 15px;
+            width: calc(100% - 10px); /* Ocupa casi todo el ancho */
+        }
+
+        #toggleSpeechBtn.speaking {
+            background-color: #ffc107;
+        }
+
+        #toggleSpeechBtn:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+        }
+
+        #steps-container {
+            margin-top: 30px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            background-color: var(--primary-bg);
+            max-height: 400px;
+            overflow-y: auto;
+            text-align: left;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        #steps-container h2 {
+            font-size: 1.3em;
+            color: var(--text-color);
             text-align: center;
             margin-top: 0;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
         }
 
-        .message-container p {
-            margin-bottom: 0;
+        #steps-container::-webkit-scrollbar {
+            width: 8px;
         }
 
-        /* Nuevos estilos para el contenido de contacto */
-        .contact-content address {
-            text-align: center;
-            font-style: normal; /* Eliminar la cursiva predeterminada para <address> */
-            margin-top: 15px;
+        #steps-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
         }
 
-        .contact-content ul {
-            list-style: none; /* Quitar viñetas */
-            padding: 0;
-            margin: 0;
+        #steps-container::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 10px;
         }
 
-        .contact-content li {
-            margin-bottom: 10px;
+        #steps-container::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-hover);
         }
 
-        .contact-content li strong {
-            display: inline-block; /* Para alinear mejor */
-            width: 70px; /* Ancho fijo para las etiquetas */
+        .step-box {
+            display: grid;
+            grid-template-columns: auto auto;
+            grid-template-rows: auto auto;
+            margin-bottom: 8px;
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            position: relative;
+            background-color: var(--secondary-bg);
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .step-box::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            border-top: 1px solid var(--border-color);
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .step-box::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            height: 50%;
+            border-left: 2px solid var(--text-color);
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .divisor-line-horizontal-strong {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 25px;
+            border-top: 2px solid var(--text-color);
+            transform: translate(calc(-50% + 12px), -50%);
+            z-index: 2;
+        }
+
+        .dividend-box {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
             text-align: right;
-            margin-right: 10px;
+            padding-right: 10px;
+            font-weight: 700;
+            font-size: 1.1em;
         }
 
-        .contact-content a {
-            color: #007bff;
+        .divisor-box {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+            text-align: left;
+            padding-left: 15px;
+            font-weight: 700;
+            font-size: 1.1em;
+            position: relative;
+        }
+
+        .remainder-box {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+            text-align: right;
+            font-weight: 700;
+            color: var(--remainder-color);
+            padding-right: 10px;
+            font-size: 1.1em;
+        }
+
+        .quotient-box {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            text-align: left;
+            color: var(--quotient-color);
+            padding-left: 15px;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        .fractional-steps-title {
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            font-size: 1.2em;
+            color: var(--accent-color);
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .multiplication-step-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 8px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: var(--steps-bg);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            font-size: 1.1em;
+        }
+        .multiplication-step-box .expression {
+            flex-grow: 1;
+            text-align: right;
+            padding-right: 10px;
+            font-weight: 400;
+        }
+        .multiplication-step-box .result-integer {
+            font-weight: 700;
+            color: var(--fractional-integer-color);
+            margin-left: 15px;
+            padding-left: 15px;
+            border-left: 2px solid var(--border-color);
+        }
+
+        #result {
+            margin-top: 25px;
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--accent-color);
+            background-color: var(--steps-bg);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid var(--accent-color);
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        /* Mensaje de Financiación */
+        .funding-message {
+            background-color: #d4edda; /* Un verde claro para un mensaje positivo */
+            color: #155724; /* Texto verde oscuro */
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 30px auto; /* Centra y da espacio */
+            max-width: 600px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .funding-message strong {
+            color: #0d4a1b; /* Verde más oscuro para resaltar */
+        }
+
+
+        /* Estilos de la Sección de Productos */
+        .productos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Mantener en escritorio */
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto 0 auto;
+            padding: 20px;
+            background-color: #ff8c00; /* Fondo naranja de la sección de productos */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .productos-container h1 { /* Estilo para el título "Nuestros Productos Destacados" */
+            grid-column: 1 / -1; /* Ocupa todas las columnas */
+            text-align: center;
+            color: #fff; /* Blanco para contrastar con el fondo naranja */
+            margin-bottom: 30px;
+            font-size: 2em; /* Tamaño de fuente para escritorio */
+        }
+
+        .producto-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            background-color: #fff; /* Fondo blanco de la tarjeta de producto */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .producto-card img {
+            max-width: 100%;
+            height: auto;
+            max-height: 200px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            object-fit: contain; /* Asegura que la imagen se contenga dentro del espacio */
+        }
+        .producto-card h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #555;
+            flex-grow: 1; /* Permite que el título ocupe el espacio disponible */
+        }
+        .producto-card .precio {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #007bff; /* Color azul para todos los precios */
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        .enlace-temu {
+            display: inline-block;
+            background-color: #ff8c00; /* Fondo naranja del botón */
+            color: #007bff; /* Color azul para el texto del botón */
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-top: auto; /* Empuja el botón hacia abajo si el contenido del card varía */
+        }
+        .enlace-temu:hover {
+            background-color: #e67e00; /* Naranja un poco más oscuro al pasar el mouse */
             text-decoration: none;
         }
 
-        .contact-content a:hover {
-            text-decoration: underline;
+
+        /* Media Queries para responsividad */
+        @media (max-width: 768px) { /* Tabletas y móviles */
+            body {
+                padding: 15px;
+            }
+            .calculator {
+                padding: 20px;
+            }
+            .calculator h2 {
+                font-size: 1.6em;
+            }
+            #conversion-options {
+                flex-direction: column; /* Apila las opciones de radio */
+                gap: 15px; /* Espacio entre opciones apiladas */
+                align-items: flex-start; /* Alinea las etiquetas a la izquierda */
+            }
+            #decimalNumberInput {
+                width: 100%; /* Ocupa todo el ancho */
+                margin-right: 0;
+                margin-bottom: 15px; /* Espacio antes de los botones */
+                max-width: none; /* Elimina la restricción de ancho máximo */
+            }
+            button {
+                width: calc(50% - 7.5px); /* Divide el ancho en 2 botones con espacio */
+                margin-left: 0;
+                margin-right: 15px; /* Espacio entre los dos primeros botones */
+                margin-bottom: 10px; /* Espacio debajo de los botones */
+            }
+            button:nth-of-type(2) { /* Ajusta el margen del segundo botón */
+                margin-right: 0;
+            }
+            #toggleSpeechBtn {
+                width: 100%; /* Ocupa todo el ancho */
+                margin-left: 0;
+                margin-right: 0;
+            }
+            #steps-container h2, .fractional-steps-title {
+                font-size: 1.2em;
+            }
+            .dividend-box, .divisor-box, .remainder-box, .quotient-box, .multiplication-step-box {
+                font-size: 1em;
+            }
+            #result {
+                font-size: 1.2em;
+                padding: 12px;
+            }
+
+            /* Responsive para Productos */
+            .productos-container {
+                padding: 15px;
+                gap: 15px;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Permite 1 o 2 columnas según el ancho */
+            }
+            .productos-container h1 {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+            .producto-card h3 {
+                font-size: 1.1em;
+            }
+            .producto-card .precio {
+                font-size: 1.3em;
+            }
+            .enlace-temu {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+            .funding-message {
+                font-size: 1em;
+                padding: 12px 18px;
+                margin: 25px auto;
+            }
         }
 
+        @media (max-width: 480px) { /* Móviles más pequeños */
+            body {
+                padding: 10px;
+            }
+            .calculator {
+                padding: 15px;
+            }
+            .calculator h2 {
+                font-size: 1.4em;
+                margin-bottom: 20px;
+            }
+            #decimalNumberInput {
+                font-size: 1em;
+                padding: 10px;
+            }
+            button {
+                width: 100%; /* Botones apilados verticalmente */
+                margin-left: 0;
+                margin-right: 0;
+                margin-bottom: 10px; /* Espacio entre botones apilados */
+            }
+            #toggleSpeechBtn {
+                margin-top: 10px;
+                margin-bottom: 0; /* No hay más botones debajo */
+            }
+            #steps-container {
+                margin-top: 20px;
+                padding: 10px;
+            }
+            #steps-container h2, .fractional-steps-title {
+                font-size: 1.05em;
+            }
+            .dividend-box, .divisor-box, .remainder-box, .quotient-box, .multiplication-step-box {
+                font-size: 0.95em;
+                padding: 6px;
+            }
+            .multiplication-step-box .expression, .multiplication-step-box .result-integer {
+                font-size: 0.9em;
+            }
+            #result {
+                font-size: 1.1em;
+                padding: 10px;
+            }
 
-        .header {
-            background-color: #fff;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 2em;
-            color: #007bff;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 20px auto;
-        }
-
-        .project-card {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-image-container {
-            width: 100%;
-            height: 200px; /* Altura fija para mantener la consistencia */
-            overflow: hidden;
-        }
-
-        .project-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Cubrir el contenedor sin distorsionar la imagen */
-            display: block;
-        }
-
-        .project-info {
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1; /* Para que la información ocupe el espacio restante */
-        }
-
-        .project-title {
-            font-size: 1.1em;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #333;
-        }
-
-        .project-creator {
-            font-style: italic;
-            color: #777;
-            margin-bottom: 10px;
-        }
-
-        .project-description {
-            color: #555;
-            margin-bottom: 15px;
-            flex-grow: 1; /* Para empujar el botón hacia abajo */
-        }
-
-        .progress-bar-container {
-            background-color: #f0f0f0;
-            border-radius: 5px;
-            height: 10px;
-            margin-bottom: 10px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            background-color: #007bff;
-            height: 100%;
-            width: 0%; /* Se actualizará con el porcentaje real */
-            border-radius: 5px;
-        }
-
-        .progress-text {
-            font-size: 0.9em;
-            color: #777;
-            margin-bottom: 10px;
-        }
-
-        .support-button {
-            background-color: #007bff;
-            color: white !important; /* ¡Añadimos !important para forzar el color blanco */
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-            display: block; /* Para que el enlace ocupe todo el botón */
-            text-decoration: none; /* Ocultar el subrayado del enlace */
-        }
-
-        .support-button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Estilos específicos para el segundo proyecto (Yate) */
-        .project-card:nth-child(2) .progress-bar {
-            width: 80%; /* Ejemplo Yate */
-        }
-
-        /* Estilos para la sección de Patrocinadores */
-        .sponsors-section {
-            background-color: #fff;
-            padding: 20px;
-            margin-top: 20px;
-            border-top: 1px solid #ddd;
-            text-align: center;
-        }
-
-        .sponsors-section h2 {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 15px;
-        }
-
-        .sponsors-list {
-            display: block; /* Cambiado a block para lista vertical */
-            text-align: center; /* Centrar los elementos de la lista */
-        }
-
-        .sponsor-item {
-            font-weight: bold;
-            color: #555;
-            margin-bottom: 5px; /* Añadir espacio entre los nombres */
-            display: block; /* Asegurar que cada nombre ocupe una línea */
-        }
-
-        /* Estilos para los proyectos de abajo */
-        .project-card:nth-child(3) .progress-bar {
-            width: 30%; /* Ejemplo I+D */
-        }
-
-        .project-card:nth-child(4) .progress-bar {
-            width: 45%; /* Ejemplo Placas */
-        }
-
-        /* Estilos para los nuevos proyectos */
-        .project-card:nth-child(5) .progress-bar {
-            width: 70%; /* Ejemplo Impresoras 3D */
-        }
-
-        .project-card:nth-child(6) .progress-bar {
-            width: 55%; /* Ejemplo Drones */
+            /* Responsive para Productos - Móviles muy pequeños */
+            .productos-container {
+                padding: 10px;
+                gap: 10px;
+                grid-template-columns: 1fr; /* Una sola columna en pantallas muy pequeñas */
+            }
+            .productos-container h1 {
+                font-size: 1.6em;
+                margin-bottom: 15px;
+            }
+            .producto-card {
+                padding: 10px;
+            }
+            .producto-card h3 {
+                font-size: 1em;
+            }
+            .producto-card .precio {
+                font-size: 1.2em;
+            }
+            .enlace-temu {
+                padding: 7px 12px;
+                font-size: 0.85em;
+            }
+            .funding-message {
+                font-size: 0.9em;
+                padding: 10px 15px;
+                margin: 20px auto;
+            }
         }
     </style>
 </head>
 <body>
-
-    <div class="logo-container">
-        <h1>IDSEEM</h1>
+    <div class="calculator">
+        <h2>Súper Conversor de Bases Numéricas</h2>
+        <div id="conversion-options">
+            <input checked="" id="toBinary" name="conversionType" type="radio" value="2" />
+            <label for="toBinary">Binario</label>
+            <input id="toOctal" name="conversionType" type="radio" value="8" />
+            <label for="toOctal">Octal</label>
+            <input id="toHexadecimal" name="conversionType" type="radio" value="16" />
+            <label for="toHexadecimal">Hexadecimal</label>
+        </div>
+        <input id="decimalNumberInput" placeholder="Ej: 5.125 o 2855" type="text" />
+        <button onclick="convertNumber()">Convertir</button>
+        <button onclick="clearCalculator()">Limpiar</button>
+        <button id="toggleSpeechBtn" onclick="toggleSpeech()">Activar Narrador</button>
+        <div id="steps-container">
+            <h2>Pasos de la Conversión:</h2>
+            <div id="conversionSteps"></div>
+            <div id="result"></div>
+        </div>
     </div>
 
-    <div class="navbar">
-        <a href="#" id="home-link">INICIO</a>
-        <a href="#" id="about-us-link">SOBRE NOSOTROS</a>
-        <a href="#" id="contact-link">CONTACTO</a>
+    <div class="funding-message">
+        ¡Tu apoyo es fundamental! El desarrollo y mantenimiento de esta calculadora se financia a través de las compras que realizas en Temu utilizando los enlaces que encontrarás justo debajo. <strong>Cada compra nos ayuda a seguir mejorando y añadiendo nuevas funciones. ¡Gracias!</strong>
     </div>
 
-    <div class="message-container" id="dynamic-message-content">
-    </div>
+    <div class="productos-container">
+        <h1>Nuestros Productos Destacados</h1>
 
-    <div class="header">
-        <h1>Proyectos Innovadores en Crowdfunding</h1>
-        <p>Descubre y apoya ideas que están transformando el mundo.</p>
-    </div>
-
-    <div class="projects-grid">
-        <div class="project-card">
-            <div class="project-image-container">
-                <img src="https://i.pinimg.com/736x/f4/0c/da/f40cda0263b58733d570859c215bd532.jpg" alt="Máquina CNC de Alta Precisión" class="project-image" />
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">CNC de Alta Precisión</h2>
-                <p class="project-creator">Por Expertos en Manufactura</p>
-                <p class="project-description">Financiando la próxima generación de máquinas CNC para prototipado rápido y producción a medida.</p>
-                <div class="progress-bar-container">
-                    <div class="progress-bar" style="width: 65%;"></div>
-                </div>
-                <p class="progress-text">65% Financiado ($65,000 de $100,000)</p>
-                <a href="https://www.paypal.com/ncp/payment/X5MHT62ZGVEPA" target="_blank" class="support-button">Apoyar este Proyecto</a>
-            </div>
+        <div class="producto-card">
+            <h3>8 Piezas de Hélices Plegables E88</h3>
+            <img src="https://img.kwcdn.com/product/open/2b296eb346384e5b92cab5529e006196-goods.jpeg?imageView2/2/w/800/q/70/format/webp" alt="Hélices Plegables E88">
+            <p class="precio">$2,82</p>
+            <a href="https://app.temu.com/m/fokazru6rv6" target="_blank" class="enlace-temu">Ver en Temu</a>
         </div>
 
-        <div class="project-card">
-            <div class="project-image-container">
-                <img src="https://i.pinimg.com/236x/12/07/8e/12078eeec5c377877b827322c6349832.jpg" alt="Yate Turístico de Lujo" class="project-image" />
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">Yate Turístico de Lujo</h2>
-                <p class="project-creator">Por Navegantes Visionarios</p>
-                <p class="project-description">Construyendo un yate ecológico con materiales reciclados y energía solar para una navegación responsable.</p>
-                <div class="progress-bar-container">
-                    <div class="progress-bar" style="width: 80%;"></div>
-                </div>
-                <p class="progress-text">80% Financiado ($800,000 de $1,000,000)</p>
-                <a href="https://www.paypal.com/ncp/payment/Y67N4MGRWPF2E" target="_blank" class="support-button">Apoyar este Proyecto</a>
-            </div>
+        <div class="producto-card">
+            <h3>Drone Inteligente E88 PRO</h3>
+            <img src="https://img.kwcdn.com/product/fancy/64a879aa-9c3b-4927-bba8-9f012667632a.jpg?imageView2/2/w/1300/q/90/format/webp" alt="Drone Inteligente E88 PRO">
+            <p class="precio">$17,99</p>
+            <a href="https://app.temu.com/m/f0r4zwp6n0u" target="_blank" class="enlace-temu">Ver en Temu</a>
         </div>
 
-        <div class="project-card">
-            <div class="project-image-container">
-                <img src="https://i.pinimg.com/736x/cf/a7/df/cfa7dfa7118df61cb7e1ed4ab6d9aea9.jpg" alt="Diseño conceptual de investigación y desarrollo" class="project-image" />
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">I+D de Contenido DIY: Nuevas Guías y Exploraciones</h2>
-                <p class="project-creator">Por Johnny A.V.</p>
-                <p class="project-description">Apoya la investigación y el desarrollo de nuevo contenido educativo DIY, explorando nuevas técnicas, efectos visuales y aplicaciones innovadoras para proyectos como los chorros de agua iluminados con láser y otros emocionantes experimentos creativos.</p>
-                <div class="progress-bar-container">
-                    <div class="progress-bar" style="width: 30%;"></div>
-                </div>
-                <p class="progress-text">30% Financiado ($4,500 de $15,000)</p>
-                <a href="https://www.paypal.com/ncp/payment/7AZX34AVZPCD2" target="_blank" class="support-button">Apoyar I+D de Contenido</a>
-            </div>
+        <div class="producto-card">
+            <h3>Teclado y mouse inalámbricos</h3>
+            <img src="https://img.kwcdn.com/product/1f79705598/ec7590d1-5055-4042-9466-05081589db02_1000x1000.jpeg?imageView2/2/w/1300/q/90/format/webp" alt="Teclado y mouse inalámbricos">
+            <p class="precio">$20,00</p>
+            <a href="https://app.temu.com/m/f00ajhh91tc" target="_blank" class="enlace-temu">Ver en Temu</a>
         </div>
 
-        <div class="project-card">
-            <div class="project-image-container">
-                <img src="https://i.pinimg.com/736x/07/d1/9d/07d19de9977f03531a7e93c6c8a97a6a.jpg" alt="Placa de circuito impreso con componentes electrónicos" class="project-image" />
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">Fabricación de Placas Electrónicas DIY</h2>
-                <p class="project-creator">Por Innovadores en Electrónica</p>
-                <p class="project-description">Financia la creación de herramientas, guías y recursos para facilitar la fabricación de placas electrónicas personalizadas para proyectos DIY, desde prototipos hasta producciones a pequeña escala.</p>
-                <div class="progress-bar-container">
-                    <div class="progress-bar" style="width: 45%;"></div>
-                </div>
-                <p class="progress-text">45% Financiado ($9,000 de $20,000)</p>
-                <a class="support-button" href="https://www.paypal.com/ncp/payment/X8VA3LP2V9A76" target="_blank">Apoyar Fabricación de Placas</a>
-            </div>
+        <div class="producto-card">
+            <h3>Reloj inteligente, pantalla táctil completa.</h3>
+            <img src="https://img.kwcdn.com/product/fancy/86cd58a0-6254-4fc5-8e8c-177d68db4bca.jpg?imageView2/2/w/1300/q/90/format/webp" alt="Reloj inteligente">
+            <p class="precio">$11,99</p>
+            <a href="https://app.temu.com/m/fdg4wgkd4ug" target="_blank" class="enlace-temu">Ver en Temu</a>
         </div>
 
-        <div class="project-card">
-            <div class="project-image-container">
-                <img src="https://s.alicdn.com/@sc04/kf/H28c0c5597fab4647826da24f72242b793.jpg_720x720q50.jpg" alt="Impresoras 3D de gran formato" class="project-image" />
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">Impresoras 3D de gran formato</h2>
-                <p class="project-creator">Por Makers Industriales</p>
-                <p class="project-description">Apoya el desarrollo de impresoras 3D de gran formato para la producción de piezas a escala industrial con alta precisión.</p>
-                <div class="progress-bar-container">
-                    <div class="progress-bar" style="width: 70%;"></div>
-                </div>
-                <p class="progress-text">70% Financiado ($70,000 de $100,000)</p>
-                <a class="support-button" href="https://www.paypal.com/ncp/payment/9FGBXZFXFD884" target="_blank">Apoyar Impresoras 3D</a>
-            </div>
+        <div class="producto-card">
+            <h3>Kit de inicio para principiantes Arduino</h3>
+            <img src="https://img.kwcdn.com/product/fancy/d97b513c-a155-4a1e-8652-01ad24553795.jpg?imageView2/2/w/1300/q/90/format/webp" alt="Kit de inicio Arduino">
+            <p class="precio">$19,58</p>
+            <a href="https://app.temu.com/m/fzt53gf8doi" target="_blank" class="enlace-temu">Ver en Temu</a>
         </div>
 
-        <div class="project-card">
-            <div class="project-image-container">
-                <img src="https://s.alicdn.com/@sc04/kf/H5ebdcde46919408ead6c32e79262079a8.png_720x720q50.jpg" alt="Drones agrícolas de gran formato" class="project-image" />
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">Drones agrícolas de gran formato</h2>
-                <p class="project-creator">Por Agrotech Innovación</p>
-                <p class="project-description">Financiando drones agrícolas de gran formato para la monitorización de cultivos, fumigación eficiente y análisis de datos para la agricultura de precisión.</p>
-                <div class="progress-bar-container">
-                    <div class="progress-bar" style="width: 55%;"></div>
-                </div>
-                <p class="progress-text">55% Financiado ($55,000 de $100,000)</p>
-                <a class="support-button" href="https://www.paypal.com/ncp/payment/SNDNX5SFQUH8W" target="_blank">Apoyar Drones Agrícolas</a>
-            </div>
+        <div class="producto-card">
+            <h3>Modulo de Controlador de Motor Servo PWM de 16 Canales.</h3>
+            <img src="https://img.kwcdn.com/product/fancy/1ca406d9-4733-4414-8cad-ddccc46c7029.jpg?imageView2/2/w/1300/q/90/format/webp" alt="Modulo de Controlador de Motor Servo PWM">
+            <p class="precio">$4,42</p>
+            <a href="https://app.temu.com/m/ftj2ebtk1mj" target="_blank" class="enlace-temu">Ver en Temu</a>
         </div>
 
-    </div>
-
-    <div class="sponsors-section">
-        <h2>Nuestros Patrocinadores</h2>
-        <div class="sponsors-list">
-            <span class="sponsor-item">Solofibra</span>
-            <span class="sponsor-item">Torneria FREDMEN</span>
-            <span class="sponsor-item">Operadora de turismo Yatell</span>
+        <div class="producto-card">
+            <h3>Disco Duro Externo Portátil USB 3.0 de 160GB/250GB/320GB/500GB</h3>
+            <img src="https://img.kwcdn.com/product/fancy/ae485586-e433-46c4-9fc4-3e45cbe41809.jpg?imageView2/2/w/1300/q/90/format/webp" alt="Disco Duro Externo Portátil">
+            <p class="precio">$12,64</p>
+            <a href="https://app.temu.com/m/f6ntryyhc0j" target="_blank" class="enlace-temu">Ver en Temu</a>
         </div>
+
+        <div class="producto-card">
+            <h3>Trípode De Seguimiento Facial Automático, Sin Necesidad De Aplicación.</h3>
+            <img src="https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/3e687d509a18d9904abd66d9c2eb988a.jpg?imageView2/2/w/1300/q/90/format/webp" alt="Trípode De Seguimiento Facial Automático">
+            <p class="precio">$16,14</p>
+            <a href="https://app.temu.com/m/fkqfvumn618" target="_blank" class="enlace-temu">Ver en Temu</a>
+        </div>
+
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const homeLink = document.getElementById('home-link');
-            const aboutUsLink = document.getElementById('about-us-link');
-            const contactLink = document.getElementById('contact-link');
-            const dynamicMessageContent = document.getElementById('dynamic-message-content');
+        const synth = window.speechSynthesis;
+        let speechEnabled = false;
+        let currentUtterance = null;
 
-            // Define the content for each section
-            const aboutUsText = `
-                <h2>Sobre Nosotros </h2>
-                <p>El Corazón que Impulsa tus Proyectos.En el núcleo de esta plataforma de crowdfunding se encuentra un equipo gestor apasionado y multidisciplinario, unido por la firme creencia en el poder de la colaboración y la innovación. Somos un grupo de profesionales con experiencia diversa en áreas cruciales para el éxito de cualquier proyecto, desde la planificación estratégica y la gestión de campañas hasta la tecnología web, el marketing digital y la construcción de comunidades sólidas.</p>
-            `;
+        function speak(text) {
+            if (synth.speaking) {
+                synth.cancel();
+            }
+            if (speechEnabled) {
+                currentUtterance = new SpeechSynthesisUtterance(text);
+                currentUtterance.lang = 'es-ES';
+                synth.speak(currentUtterance);
+            }
+        }
 
-            // Contenido de contacto actualizado con tu número y correo
-            const contactText = `
-                <div class="contact-content">
-                    <h2>Contacto</h2>
-                    <p>¡Nos encantaría saber de ti! Puedes contactarnos a través de:</p>
-                    <address>
-                        <ul>
-                            <li><strong>Email:</strong> <a href="mailto:jaavjohnny@gmail.com">jaavjohnny@gmail.com</a></li>
-                            <li><strong>Teléfono:</strong> <a href="tel:+593990521316">099 052 1316</a></li>
-                        </ul>
-                    </address>
-                    <p>Tu mensaje es importante para nosotros y responderemos lo antes posible.</p>
-                </div>
-            `;
+        function toggleSpeech() {
+            speechEnabled = !speechEnabled;
+            const toggleBtn = document.getElementById('toggleSpeechBtn');
+            if (speechEnabled) {
+                toggleBtn.textContent = 'Desactivar Narrador';
+                toggleBtn.classList.add('speaking');
+                speak("Narrador activado. Ahora leeré los pasos de la conversión.");
+            } else {
+                synth.cancel();
+                toggleBtn.textContent = 'Activar Narrador';
+                toggleBtn.classList.remove('speaking');
+                speak("Narrador desactivado.");
+            }
+        }
 
-            // Function to close the message container
-            function closeMessageContainer() {
-                if (dynamicMessageContent.classList.contains('show')) {
-                    dynamicMessageContent.classList.remove('show');
-                    // Clear content after transition for a cleaner state
-                    setTimeout(() => {
-                        dynamicMessageContent.innerHTML = '';
-                    }, 500); // Match this with your CSS transition duration
+        function convertNumber() {
+            if (synth.speaking) {
+                synth.cancel();
+            }
+
+            const decimalNumberStr = document.getElementById("decimalNumberInput").value.trim();
+            const conversionStepsDiv = document.getElementById("conversionSteps");
+            const resultDiv = document.getElementById("result");
+
+            let base;
+            let baseName;
+            let resultLabel;
+
+            const radios = document.getElementsByName('conversionType');
+            for (const radio of radios) {
+                if (radio.checked) {
+                    base = parseInt(radio.value);
+                    baseName = radio.labels[0].textContent;
+                    resultLabel = `Resultado ${baseName} (de abajo hacia arriba para la entera, de arriba hacia abajo para la fraccionaria):`;
+                    break;
                 }
             }
 
-            // Function to set content and toggle visibility
-            function toggleMessage(contentToShow) {
-                const isCurrentlyShowing = dynamicMessageContent.classList.contains('show');
-                const currentContent = dynamicMessageContent.innerHTML.trim();
-
-                // Check if the same content is already showing
-                if (isCurrentlyShowing && currentContent === contentToShow.trim()) {
-                    closeMessageContainer(); // If it's the same, close it
-                } else {
-                    // If something else is showing, or nothing is showing,
-                    // first hide it (if visible) then show the new content
-                    if (isCurrentlyShowing) {
-                        dynamicMessageContent.classList.remove('show');
-                        setTimeout(() => { // Delay setting new content until after hide transition
-                            dynamicMessageContent.innerHTML = contentToShow;
-                            dynamicMessageContent.classList.add('show');
-                        }, 500); // Match CSS transition duration
-                    } else {
-                        // If nothing is showing, just set content and show
-                        dynamicMessageContent.innerHTML = contentToShow;
-                        dynamicMessageContent.classList.add('show');
-                    }
-                }
+            if (decimalNumberStr === "") {
+                const message = "Por favor, ingresa un número decimal.";
+                alert(message);
+                speak(message);
+                return;
             }
 
-            // --- Event Listeners ---
-            homeLink.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent default link behavior
-                closeMessageContainer(); // Close any open message
-            });
+            const parts = decimalNumberStr.split('.');
+            let integerPart = 0;
+            let fractionalPart = 0;
 
-            aboutUsLink.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent default link behavior
-                toggleMessage(aboutUsText);
-            });
+            if (parts.length > 2) {
+                const message = "Formato de número decimal inválido. Solo se permite un punto decimal.";
+                alert(message);
+                speak(message);
+                return;
+            }
 
-            contactLink.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent default link behavior
-                toggleMessage(contactText);
-            });
-        });
+            if (parts[0] !== "") {
+                integerPart = parseInt(parts[0]);
+                if (isNaN(integerPart) || integerPart < 0) {
+                    const message = "La parte entera debe ser un número entero positivo o cero.";
+                    alert(message);
+                    speak(message);
+                    return;
+                }
+            } else {
+                integerPart = 0;
+            }
+
+            if (parts.length === 2 && parts[1] !== "") {
+                const tempFractionalStr = "0." + parts[1];
+                fractionalPart = parseFloat(tempFractionalStr);
+                if (isNaN(fractionalPart) || fractionalPart < 0) {
+                    const message = "La parte fraccionaria no es válida. Asegúrate que solo contiene dígitos.";
+                    alert(message);
+                    speak(message);
+                    return;
+                }
+                if (parts[1] !== "" && isNaN(parseInt(parts[1]))) {
+                    const message = "La parte fraccionaria no es válida. Asegúrate que solo contiene dígitos.";
+                    alert(message);
+                    speak(message);
+                    return;
+                }
+
+            } else if (parts.length === 2 && parts[1] === "") {
+                fractionalPart = 0;
+            }
+
+            const hexChars = "0123456789ABCDEF";
+            function getDigitChar(digit) {
+                return hexChars[digit];
+            }
+
+            function formatFloatForDisplay(num) {
+                let str = num.toString();
+                if (str.includes('.') && str.split('.')[1].length > 12) {
+                    str = num.toFixed(12);
+                }
+                str = str.replace(/(\.\d*?[1-9])0+$/, '$1');
+                str = str.replace(/\.0+$/, '');
+                return str;
+            }
+
+            const integerStepsHTML = [];
+            const convertedIntegerDigits = [];
+            let currentInteger = integerPart;
+            let speechText = "Iniciando conversión. ";
+
+            speechText += `Parte entera: ${integerPart}. `;
+
+            if (currentInteger === 0) {
+                integerStepsHTML.push(`
+                    <div class="step-box">
+                        <div class="dividend-box">0</div>
+                        <div class="divisor-box">${base}</div>
+                        <div class="remainder-box">0</div>
+                        <div class="quotient-box">0</div>
+                        <div class="divisor-line-horizontal-strong"></div>
+                    </div>
+                `);
+                convertedIntegerDigits.push("0");
+                speechText += `El número es cero, la parte entera convertida es cero. `;
+            } else {
+                speechText += `Dividiendo la parte entera ${integerPart} entre la base ${base}. `;
+                let stepNumber = 1;
+                while (currentInteger > 0) {
+                    const remainder = currentInteger % base;
+                    const quotient = Math.floor(currentInteger / base);
+                    const numStr = String(currentInteger);
+                    let displayRemainder = getDigitChar(remainder);
+
+                    integerStepsHTML.push(`
+                        <div class="step-box">
+                            <div class="dividend-box">${numStr}</div>
+                            <div class="divisor-box">${base}</div>
+                            <div class="remainder-box">${displayRemainder}</div>
+                            <div class="quotient-box">${quotient}</div>
+                            <div class="divisor-line-horizontal-strong"></div>
+                        </div>
+                    `);
+                    convertedIntegerDigits.unshift(displayRemainder);
+                    speechText += `Paso ${stepNumber}: ${numStr} dividido por ${base} es ${quotient} con un residuo de ${displayRemainder}. `;
+                    currentInteger = quotient;
+                    stepNumber++;
+                }
+                speechText += `La parte entera convertida, leyendo los residuos de abajo hacia arriba, es ${convertedIntegerDigits.join("")}. `;
+            }
+
+            let fullConvertedResult = convertedIntegerDigits.join("");
+            let fractionalStepsHTML = [];
+            let convertedFractionalDigits = [];
+
+            if (fractionalPart > 0) {
+                fractionalStepsHTML.push('<div class="fractional-steps-title">Pasos de la Parte Fraccionaria:</div>');
+                speechText += `Ahora, la parte fraccionaria: ${formatFloatForDisplay(fractionalPart)}. `;
+
+                let currentFractional = fractionalPart;
+                let iterationCount = 0;
+                const MAX_ITERATIONS = 25;
+                const EPSILON = 1e-9;
+
+                speechText += `Multiplicando la parte fraccionaria por la base ${base}. `;
+                let fracStepNumber = 1;
+
+                while (currentFractional > EPSILON && iterationCount < MAX_ITERATIONS) {
+                    const prevFractionalDisplay = formatFloatForDisplay(currentFractional);
+                    currentFractional *= base;
+                    const integerDigit = Math.floor(currentFractional);
+                    const displayDigit = getDigitChar(integerDigit);
+
+                    fractionalStepsHTML.push(`
+                        <div class="multiplication-step-box">
+                            <div class="expression">${prevFractionalDisplay} x ${base} = ${formatFloatForDisplay(currentFractional)}</div>
+                            <div class="result-integer">${displayDigit}</div>
+                        </div>
+                    `);
+
+                    convertedFractionalDigits.push(displayDigit);
+                    speechText += `Paso ${fracStepNumber}: ${prevFractionalDisplay} multiplicado por ${base} es igual a ${formatFloatForDisplay(currentFractional)}. El dígito entero es ${displayDigit}. `;
+                    currentFractional -= integerDigit;
+                    iterationCount++;
+                    fracStepNumber++;
+                }
+                if (convertedFractionalDigits.length > 0) {
+                    fullConvertedResult += "." + convertedFractionalDigits.join("");
+                    speechText += `La parte fraccionaria convertida, leyendo los dígitos de arriba hacia abajo, es punto ${convertedFractionalDigits.join("")}. `;
+                }
+            } else if (decimalNumberStr.endsWith('.') && parts.length === 2) {
+                fullConvertedResult += ".";
+                speechText += `La parte fraccionaria es cero. `;
+            }
+
+            conversionStepsDiv.innerHTML = integerStepsHTML.join("") + fractionalStepsHTML.join("");
+            const finalResultText = `${resultLabel} ${fullConvertedResult}`;
+            resultDiv.textContent = finalResultText;
+            speechText += `El resultado final es ${fullConvertedResult}.`;
+            speak(speechText);
+        }
+
+        function clearCalculator() {
+            if (synth.speaking) {
+                synth.cancel();
+            }
+            document.getElementById("decimalNumberInput").value = "";
+            document.getElementById("conversionSteps").innerHTML = "";
+            document.getElementById("result").textContent = "";
+            document.getElementById("toBinary").checked = true;
+            if (speechEnabled) {
+                speak("Calculadora limpiada. Por favor, ingresa un nuevo número.");
+            }
+        }
     </script>
 </body>
 </html>
