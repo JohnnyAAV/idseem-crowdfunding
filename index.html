@@ -1,12 +1,12 @@
-
+<!doctype html>
 <html>
 <head>
-    <title>Asesoría Empresarial: Tu Imperio Legal en Ecuador</title>
-    <meta charset="UTF-8"></meta>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"></meta>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"></link>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyectos Innovadores en Crowdfunding</title>
     <style>
-        /* CSS General */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap'); /* Importa una fuente bold y moderna para el logo */
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -15,418 +15,478 @@
             color: #333;
         }
 
-        /* Encabezado */
-        .header {
-            background-color: #fff;
-            padding: 10px 20px;
-            text-align: center; /* Centrar el texto del encabezado */
-            border-bottom: 1px solid #ddd;
+        /* Estilos para el logo IDSEEM */
+        .logo-container {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #f4f4f4; /* Mantiene el color de fondo para la continuidad */
         }
 
-        .header h1 {
-            margin-top: 0;
-            font-size: 2.2em;
-            color: #007bff;
+        .logo-container h1 {
+            font-family: 'Montserrat', sans-serif; /* Aplica la fuente importada */
+            font-size: 4em; /* ¡HECHO! ESTE VALOR HACE LA LETRA MUCHO MÁS GRANDE */
+            color: #007bff; /* Un color azul llamativo */
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Opcional: añade una sombra sutil */
+            letter-spacing: 3px; /* Opcional: ajusta el espaciado entre letras */
         }
 
-        .header p {
-            margin-top: 5px;
-            font-size: 1.2em;
-            color: #555;
-        }
-
-        /* Navbar */
+        /* Estilos para la barra de navegación */
         .navbar {
             background-color: #333;
             color: white;
             padding: 15px 20px;
             display: flex;
-            justify-content: center;
+            justify-content: flex-start; /* Alinea los elementos a la izquierda */
             align-items: center;
-            flex-wrap: wrap; /* Permite que los enlaces salten de línea */
         }
 
         .navbar a {
             color: white;
             text-decoration: none;
-            margin: 0 15px;
+            margin-right: 20px;
             font-weight: bold;
             font-size: 1em;
             transition: color 0.3s ease;
-            padding: 5px 0;
         }
 
         .navbar a:hover {
             color: #007bff;
         }
 
-        /* Contenedor principal de mensajes y servicios */
-        #global-message-container {
+        /* Estilos para el contenedor de mensajes (para "Sobre Nosotros" y "Contacto") */
+        .message-container {
             background-color: #fff;
             border: 1px solid #ddd;
             border-radius: 8px;
-            padding: 0;
+            padding: 0; /* padding inicial en 0 para la transición */
             margin: 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            max-height: 0; /* Oculta el contenido inicialmente */
-            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            overflow: hidden; /* Ocultar el contenido desbordante para la transición */
+            max-height: 0; /* Ocultar inicialmente y permitir la transición */
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out; /* Transición para altura y padding */
         }
 
-        #global-message-container.show {
-            max-height: 3000px; /* Suficiente para el contenido, ajustar si es necesario */
-            padding: 20px;
+        .message-container.show {
+            max-height: 300px; /* Incrementado para asegurar que el contenido de contacto se vea */
+            padding: 20px; /* Asegura que el padding se aplique cuando se muestra */
         }
         
-        /* Estilos generales para el contenido dentro de message-container */
-        .message-content {
-            padding: 20px; /* Añadimos padding al contenido para que no esté pegado a los bordes */
-        }
-
-        .message-content h1, .message-content h2 {
+        /* Estilo específico para los mensajes */
+        .message-container h1, .message-container h2 {
             color: #007bff;
             text-align: center;
             margin-top: 0;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 10px;
-        }
-        
-        .message-content p {
-            text-align: justify;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        .message-content ul {
-            list-style-type: none; /* Quitamos los puntos por defecto */
-            padding-left: 0;
-            margin-bottom: 15px;
-        }
-
-        .message-content ul li {
             margin-bottom: 10px;
-            position: relative; /* Para el icono personalizado */
-            padding-left: 30px; /* Espacio para el icono */
-            text-align: justify;
         }
 
-        /* Estilo para el icono de check en las listas (QUIENES SOMOS) */
-        .message-content ul li .icon-check {
-            color: #28a745; /* Color verde */
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            top: 0;
-            font-size: 1.2em; /* Tamaño del icono */
+        .message-container p {
+            margin-bottom: 0;
         }
 
-        .message-content strong {
-            color: #e74c3c; 
-        }
-
-        /* Estilos para el logo y texto del encabezado */
-        /* Eliminamos las reglas de .header .separator y .header .separator img si el nuevo logo ya maneja su centrado */
-        .header .separator {
-            /* Los estilos de centrado ya están en el div del logo */
-            /* Puedes ajustar el margen o padding aquí si es necesario para el espaciado del logo */
-        }
-        /* Eliminar br y p que añade espacio innecesario en el código del logo */
-        .header > p, .header > br {
-            display: none;
-        }
-
-
-        /* Sección de Servicios (para INICIO) */
-        .services-section {
-            padding: 20px;
+        /* Nuevos estilos para el contenido de contacto */
+        .contact-content address {
             text-align: center;
-            max-width: 1200px;
-            margin: 20px auto;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: none; /* Inicialmente oculto, se muestra con JS */
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Columnas responsivas */
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        .service-card {
-            background-color: #f8f9fa;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 25px;
-            text-align: left;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .service-card h3 {
-            color: #007bff;
-            margin-top: 0;
-            font-size: 1.4em;
-            border-bottom: 1px dashed #d0d0d0;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-            display: flex; /* Para alinear el ícono con el texto */
-            align-items: center;
-        }
-
-        .service-card h3 .icon { /* Estilo para los íconos de Font Awesome */
-            margin-right: 10px;
-            font-size: 1.2em;
-            color: #007bff; /* Color del ícono */
-        }
-
-        .service-card p {
-            font-size: 0.95em;
-            line-height: 1.5;
-            color: #666;
-            text-align: justify;
-        }
-
-        /* Restablecemos el comportamiento predeterminado de los bullets */
-        .service-card ul {
-            list-style-type: disc; /* Vuelve a los bullets de disco estándar */
-            padding-left: 20px; /* Agrega padding para que los bullets sean visibles */
+            font-style: normal; /* Eliminar la cursiva predeterminada para <address> */
             margin-top: 15px;
         }
 
-        .service-card ul li {
-            font-size: 0.9em;
-            margin-bottom: 8px;
-            color: #444;
-            text-align: justify;
+        .contact-content ul {
+            list-style: none; /* Quitar viñetas */
+            padding: 0;
+            margin: 0;
         }
 
-        /* Estilos para el footer */
-        .footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 30px;
-            font-size: 0.9em;
+        .contact-content li {
+            margin-bottom: 10px;
         }
-        
-        /* Media queries para responsividad */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-            }
-            .navbar a {
-                margin: 10px 0;
-            }
-            .services-grid {
-                grid-template-columns: 1fr; /* Una columna en móviles */
-            }
+
+        .contact-content li strong {
+            display: inline-block; /* Para alinear mejor */
+            width: 70px; /* Ancho fijo para las etiquetas */
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        .contact-content a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .contact-content a:hover {
+            text-decoration: underline;
+        }
+
+
+        .header {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2em;
+            color: #007bff;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .project-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-image-container {
+            width: 100%;
+            height: 200px; /* Altura fija para mantener la consistencia */
+            overflow: hidden;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cubrir el contenedor sin distorsionar la imagen */
+            display: block;
+        }
+
+        .project-info {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; /* Para que la información ocupe el espacio restante */
+        }
+
+        .project-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .project-creator {
+            font-style: italic;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .project-description {
+            color: #555;
+            margin-bottom: 15px;
+            flex-grow: 1; /* Para empujar el botón hacia abajo */
+        }
+
+        .progress-bar-container {
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            height: 10px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background-color: #007bff;
+            height: 100%;
+            width: 0%; /* Se actualizará con el porcentaje real */
+            border-radius: 5px;
+        }
+
+        .progress-text {
+            font-size: 0.9em;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .support-button {
+            background-color: #007bff;
+            color: white !important; /* ¡Añadimos !important para forzar el color blanco */
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            display: block; /* Para que el enlace ocupe todo el botón */
+            text-decoration: none; /* Ocultar el subrayado del enlace */
+        }
+
+        .support-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilos específicos para el segundo proyecto (Yate) */
+        .project-card:nth-child(2) .progress-bar {
+            width: 80%; /* Ejemplo Yate */
+        }
+
+        /* Estilos para la sección de Patrocinadores */
+        .sponsors-section {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .sponsors-section h2 {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .sponsors-list {
+            display: block; /* Cambiado a block para lista vertical */
+            text-align: center; /* Centrar los elementos de la lista */
+        }
+
+        .sponsor-item {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px; /* Añadir espacio entre los nombres */
+            display: block; /* Asegurar que cada nombre ocupe una línea */
+        }
+
+        /* Estilos para los proyectos de abajo */
+        .project-card:nth-child(3) .progress-bar {
+            width: 30%; /* Ejemplo I+D */
+        }
+
+        .project-card:nth-child(4) .progress-bar {
+            width: 45%; /* Ejemplo Placas */
+        }
+
+        /* Estilos para los nuevos proyectos */
+        .project-card:nth-child(5) .progress-bar {
+            width: 70%; /* Ejemplo Impresoras 3D */
+        }
+
+        .project-card:nth-child(6) .progress-bar {
+            width: 55%; /* Ejemplo Drones */
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <p></p>
-        <div class="separator" style="clear: both; text-align: center;">
-            <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi_GuMR21QfsR0XqYBIzkrTGZLVX0FVMNAp_N_GK5OztdJ0RCbTUgvOKWFteBpefv3Bc4cJm10bmnhbQ9CKf-s2dh5Tg8wgLIE2vp9WZmb6JfXE8yGmrCl2n_By90M_WnNvPgKa9QQGzkvw5AbMh-jgpXQt-6b75k3wgrVhx1zpGuGgt1gQGoq7RN8WJKr1/s1536/assets_task_01jw7p5y4pfekszdywzb57gaqt_1748309906_img_3.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">
-                <img alt="logo" border="0" data-original-height="799" data-original-width="1536" height="116" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4QN_Z1uXk8GMbOl5AUONtfzuo2ze6qfhmgMQbxOgtqdQkeOtEPf9ZK_zH5UAJHoP2IMA18FC13gg_v4sPY5ilpErn3h7-OYP2pNdYLRbXyACrp4mdGOTiyqQo_-hG69M2frgc5oR58x8KcxrDuV1tyAwd9m2yggifbnsVMX_f5Ljb1tQSJX-y63XBNc54/s200/assets_task_01jw7p5y4pfekszdywzb57gaqt_1748309906_img_3.png" width="320" />
-            </a>
-        </div>
-        <br />
-        <div class="separator" style="clear: both; text-align: center;"><br /></div>
-        <br />
-        <h1>CONSULTORA LEGAL EMPRESARIAL.</h1>
-        <p>Acompañamiento para compañías en Ecuador.</p>
+    <div class="logo-container">
+        <h1>IDSEEM</h1>
     </div>
 
     <div class="navbar">
         <a href="#" id="home-link">INICIO</a>
-        <a href="#" id="quienes-somos-link">QUIENES SOMOS</a>
+        <a href="#" id="about-us-link">SOBRE NOSOTROS</a>
         <a href="#" id="contact-link">CONTACTO</a>
     </div>
 
-    <div class="services-section" id="services-section">
-        <h2>Impulsa tu Visión: Nuestros Servicios Legales Empresariales</h2>
-        <p>En el dinámico entorno empresarial ecuatoriano, contar con una asesoría legal sólida es la clave para el éxito. En colaboración con expertos abogados, ofrecemos un portafolio integral de servicios diseñado para blindar tu negocio y asegurar su crecimiento.</p>
-        
-        <div class="services-grid">
-            
-            <div class="service-card">
-                <h3><i class="fas fa-building icon"></i> Fundación Sólida: Constitución de Empresas</h3>
-                <p>Convertimos tu idea en una realidad legal. Te asesoramos en la elección de la estructura societaria ideal (S.A., S.R.L., S.P.A., etc.), y gestionamos todo el proceso de registro ante la Superintendencia de Compañías y obtención de permisos.</p>
-                <ul>
-                    <li>Elección del tipo societario y redacción de estatutos.</li>
-                    <li>Registro ante entidades correspondientes.</li>
-                    <li>Obtención de RUC y permisos iniciales.</li>
-                </ul>
-            </div>
-
-            <div class="service-card">
-                <h3><i class="fas fa-handshake icon"></i> Estrategia de Crecimiento: Compra y Venta de Compañías</h3>
-                <p>Navega con seguridad en el mercado de fusiones y adquisiciones. Ofrecemos asesoría legal completa para la compraventa de acciones o participaciones, incluyendo auditorías legales (Due Diligence) para identificar y mitigar riesgos.</p>
-                <ul>
-                    <li>Asesoría en adquisición/venta de acciones.</li>
-                    <li>Auditoría legal (Due Diligence).</li>
-                    <li>Negociación y redacción de contratos.</li>
-                </ul>
-            </div>
-
-            <div class="service-card">
-                <h3><i class="fas fa-chart-line icon"></i> Adaptación y Evolución: Reformas Societarias</h3>
-                <p>Tu empresa crece y cambia, y su estructura legal debe hacerlo también. Te apoyamos en reformas estatutarias, aumento o disminución de capital, cambios de objeto social, denominación o domicilio, y reorganizaciones empresariales.</p>
-                <ul>
-                    <li>Modificación de estatutos y capital.</li>
-                    <li>Cambios de objeto, nombre o domicilio.</li>
-                    <li>Fusiones, escisiones y transformaciones.</li>
-                </ul>
-            </div>
-
-            <div class="service-card">
-                <h3><i class="fas fa-file-contract icon"></i> Contratos Inteligentes: Asesoría Mercantil y Civil</h3>
-                <p>La base de toda relación comercial son los contratos. Protegemos tus intereses con la redacción y revisión de contratos comerciales, acuerdos de confidencialidad y no competencia, y contratos de arrendamiento corporativos.</p>
-                <ul>
-                    <li>Elaboración y revisión de contratos comerciales.</li>
-                    <li>Acuerdos de confidencialidad y no competencia.</li>
-                    <li>Contratos de arrendamiento para empresas.</li>
-                </ul>
-            </div>
-
-            <div class="service-card">
-                <h3><i class="fas fa-users-cog icon"></i> Armonía Laboral: Gestión de Recursos Humanos</h3>
-                <p>Cumple con la normativa laboral ecuatoriana y fomenta un ambiente de trabajo justo. Asesoramos en la elaboración de contratos, reglamentos internos, procesos de despidos y renuncias, y representamos a tu empresa ante el Ministerio de Trabajo.</p>
-                <ul>
-                    <li>Contratos de trabajo y reglamentos internos.</li>
-                    <li>Asesoría en despidos y liquidaciones.</li>
-                    <li>Representación ante autoridades laborales.</li>
-                </ul>
-            </div>
-
-            <div class="service-card">
-                <h3><i class="fas fa-lightbulb icon"></i> Innovación Segura: Propiedad Intelectual</h3>
-                <p>Protege el valor intangible de tu empresa. Gestionamos el registro de marcas, nombres comerciales y patentes, además de ofrecer asesoría en derechos de autor y contratos de licencia para tus innovaciones.</p>
-                <ul>
-                    <li>Registro de marcas y patentes.</li>
-                    <li>Protección de derechos de autor.</li>
-                    <li>Contratos de licencia y tecnología.</li>
-                </ul>
-            </div>
-            
-        </div>
-        <p style="margin-top: 30px; text-align: center;">¡Tu éxito es nuestra prioridad! Contáctanos para una asesoría personalizada.</p>
+    <div class="message-container" id="dynamic-message-content">
     </div>
 
-    <div class="message-container" id="global-message-container"></div>
+    <div class="header">
+        <h1>Proyectos Innovadores en Crowdfunding</h1>
+        <p>Descubre y apoya ideas que están transformando el mundo.</p>
+    </div>
 
-    <div class="footer">
-        <p>© 2025 Asesoría Empresarial. Todos los derechos reservados.</p>
-        <p>Ubicados en Manta, Manabí, Ecuador.</p>
+    <div class="projects-grid">
+        <div class="project-card">
+            <div class="project-image-container">
+                <img src="https://i.pinimg.com/736x/f4/0c/da/f40cda0263b58733d570859c215bd532.jpg" alt="Máquina CNC de Alta Precisión" class="project-image" />
+            </div>
+            <div class="project-info">
+                <h2 class="project-title">CNC de Alta Precisión</h2>
+                <p class="project-creator">Por Expertos en Manufactura</p>
+                <p class="project-description">Financiando la próxima generación de máquinas CNC para prototipado rápido y producción a medida.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: 65%;"></div>
+                </div>
+                <p class="progress-text">65% Financiado ($65,000 de $100,000)</p>
+                <a href="https://www.paypal.com/ncp/payment/X5MHT62ZGVEPA" target="_blank" class="support-button">Apoyar este Proyecto</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image-container">
+                <img src="https://i.pinimg.com/236x/12/07/8e/12078eeec5c377877b827322c6349832.jpg" alt="Yate Turístico de Lujo" class="project-image" />
+            </div>
+            <div class="project-info">
+                <h2 class="project-title">Yate Turístico de Lujo</h2>
+                <p class="project-creator">Por Navegantes Visionarios</p>
+                <p class="project-description">Construyendo un yate ecológico con materiales reciclados y energía solar para una navegación responsable.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: 80%;"></div>
+                </div>
+                <p class="progress-text">80% Financiado ($800,000 de $1,000,000)</p>
+                <a href="https://www.paypal.com/ncp/payment/Y67N4MGRWPF2E" target="_blank" class="support-button">Apoyar este Proyecto</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image-container">
+                <img src="https://i.pinimg.com/736x/cf/a7/df/cfa7dfa7118df61cb7e1ed4ab6d9aea9.jpg" alt="Diseño conceptual de investigación y desarrollo" class="project-image" />
+            </div>
+            <div class="project-info">
+                <h2 class="project-title">I+D de Contenido DIY: Nuevas Guías y Exploraciones</h2>
+                <p class="project-creator">Por Johnny A.V.</p>
+                <p class="project-description">Apoya la investigación y el desarrollo de nuevo contenido educativo DIY, explorando nuevas técnicas, efectos visuales y aplicaciones innovadoras para proyectos como los chorros de agua iluminados con láser y otros emocionantes experimentos creativos.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: 30%;"></div>
+                </div>
+                <p class="progress-text">30% Financiado ($4,500 de $15,000)</p>
+                <a href="https://www.paypal.com/ncp/payment/7AZX34AVZPCD2" target="_blank" class="support-button">Apoyar I+D de Contenido</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image-container">
+                <img src="https://i.pinimg.com/736x/07/d1/9d/07d19de9977f03531a7e93c6c8a97a6a.jpg" alt="Placa de circuito impreso con componentes electrónicos" class="project-image" />
+            </div>
+            <div class="project-info">
+                <h2 class="project-title">Fabricación de Placas Electrónicas DIY</h2>
+                <p class="project-creator">Por Innovadores en Electrónica</p>
+                <p class="project-description">Financia la creación de herramientas, guías y recursos para facilitar la fabricación de placas electrónicas personalizadas para proyectos DIY, desde prototipos hasta producciones a pequeña escala.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: 45%;"></div>
+                </div>
+                <p class="progress-text">45% Financiado ($9,000 de $20,000)</p>
+                <a class="support-button" href="https://www.paypal.com/ncp/payment/X8VA3LP2V9A76" target="_blank">Apoyar Fabricación de Placas</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image-container">
+                <img src="https://s.alicdn.com/@sc04/kf/H28c0c5597fab4647826da24f72242b793.jpg_720x720q50.jpg" alt="Impresoras 3D de gran formato" class="project-image" />
+            </div>
+            <div class="project-info">
+                <h2 class="project-title">Impresoras 3D de gran formato</h2>
+                <p class="project-creator">Por Makers Industriales</p>
+                <p class="project-description">Apoya el desarrollo de impresoras 3D de gran formato para la producción de piezas a escala industrial con alta precisión.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: 70%;"></div>
+                </div>
+                <p class="progress-text">70% Financiado ($70,000 de $100,000)</p>
+                <a class="support-button" href="https://www.paypal.com/ncp/payment/9FGBXZFXFD884" target="_blank">Apoyar Impresoras 3D</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image-container">
+                <img src="https://s.alicdn.com/@sc04/kf/H5ebdcde46919408ead6c32e79262079a8.png_720x720q50.jpg" alt="Drones agrícolas de gran formato" class="project-image" />
+            </div>
+            <div class="project-info">
+                <h2 class="project-title">Drones agrícolas de gran formato</h2>
+                <p class="project-creator">Por Agrotech Innovación</p>
+                <p class="project-description">Financiando drones agrícolas de gran formato para la monitorización de cultivos, fumigación eficiente y análisis de datos para la agricultura de precisión.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: 55%;"></div>
+                </div>
+                <p class="progress-text">55% Financiado ($55,000 de $100,000)</p>
+                <a class="support-button" href="https://www.paypal.com/ncp/payment/SNDNX5SFQUH8W" target="_blank">Apoyar Drones Agrícolas</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="sponsors-section">
+        <h2>Nuestros Patrocinadores</h2>
+        <div class="sponsors-list">
+            <span class="sponsor-item">Solofibra</span>
+            <span class="sponsor-item">Torneria FREDMEN</span>
+            <span class="sponsor-item">Operadora de turismo Yatell</span>
+        </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const homeLink = document.getElementById('home-link');
-            const quienesSomosLink = document.getElementById('quienes-somos-link');
+            const aboutUsLink = document.getElementById('about-us-link');
             const contactLink = document.getElementById('contact-link');
-            const globalMessageContainer = document.getElementById('global-message-container');
-            const servicesSection = document.getElementById('services-section');
+            const dynamicMessageContent = document.getElementById('dynamic-message-content');
 
-            // Contenido de "QUIENES SOMOS" actualizado
-            const quienesSomosText = `
-                <div class="message-content">
-                    <h2>Quienes Somos: Tu Socio Estratégico para el Éxito Legal Empresarial</h2>
-                    <p>En nuestra plataforma, somos el puente que conecta a tu visión empresarial con la solidez legal que necesita. Actuamos como promotores y facilitadores de una oficina de abogados líder en <strong>asesoría empresarial, constitución y venta de compañías en Ecuador</strong>.</p>
-                    <p>Nuestra misión es simplificar el complejo mundo legal para emprendedores, pymes y grandes corporaciones, garantizando que cada paso de tu negocio esté respaldado por el conocimiento y la experiencia de profesionales jurídicos altamente calificados. No somos solo un directorio, somos tu punto de partida para construir un imperio legal y exitoso en Ecuador.</p>
-                    <h3>Nuestra Propuesta de Valor:</h3>
-                    <ul>
-                        <li><span class="icon-check">✓</span> <strong>Acceso Directo a Expertos:</strong> Te conectamos con abogados especializados en derecho corporativo, mercantil, laboral y de propiedad intelectual, listos para atender tus necesidades específicas.</li>
-                        <li><span class="icon-check">✓</span> <strong>Claridad y Eficiencia:</strong> Presentamos los servicios legales de forma clara y accesible, para que tomes decisiones informadas sin jerga legal confusa.</li>
-                        <li><span class="icon-check">✓</span> <strong>Soporte Integral:</strong> Desde la constitución de tu empresa hasta la gestión de contratos y resolución de conflictos, te acompañamos en cada etapa del ciclo de vida de tu negocio.</li>
-                        <li><span class="icon-check">✓</span> <strong>Actualización Constante:</strong> Nos mantenemos al tanto de las últimas novedades legales en Ecuador para ofrecerte siempre la información más relevante y precisa.</li>
-                    </ul>
-                    <p>Confiamos en la experiencia de nuestros abogados asociados para ser el aliado estratégico que tu empresa merece. ¡Tu imperio legal comienza aquí!</p>
-                </div>
+            // Define the content for each section
+            const aboutUsText = `
+                <h2>Sobre Nosotros </h2>
+                <p>El Corazón que Impulsa tus Proyectos.En el núcleo de esta plataforma de crowdfunding se encuentra un equipo gestor apasionado y multidisciplinario, unido por la firme creencia en el poder de la colaboración y la innovación. Somos un grupo de profesionales con experiencia diversa en áreas cruciales para el éxito de cualquier proyecto, desde la planificación estratégica y la gestión de campañas hasta la tecnología web, el marketing digital y la construcción de comunidades sólidas.</p>
             `;
 
+            // Contenido de contacto actualizado con tu número y correo
             const contactText = `
-                <div class="message-content">
+                <div class="contact-content">
                     <h2>Contacto</h2>
                     <p>¡Nos encantaría saber de ti! Puedes contactarnos a través de:</p>
-                    <ul>
-                        <li><span class="icon-check">✓</span> Email: jaavjohnny@gmail.com</li>
-                        <li><span class="icon-check">✓</span> Teléfono: 099 052 1316</li>
-                        <li><span class="icon-check">✓</span> Ubicación: Operamos en Todo el Ecuador. Contáctanos para una cita en nuestra oficina asociada.</li>
-                        
+                    <address>
+                        <ul>
+                            <li><strong>Email:</strong> <a href="mailto:jaavjohnny@gmail.com">jaavjohnny@gmail.com</a></li>
+                            <li><strong>Teléfono:</strong> <a href="tel:+593990521316">099 052 1316</a></li>
+                        </ul>
+                    </address>
                     <p>Tu mensaje es importante para nosotros y responderemos lo antes posible.</p>
                 </div>
             `;
-            
-            // Función para cerrar el contenedor global (Quienes Somos/Contacto)
-            function closeGlobalMessageContainer() {
-                if (globalMessageContainer.classList.contains('show')) {
-                    globalMessageContainer.classList.remove('show');
+
+            // Function to close the message container
+            function closeMessageContainer() {
+                if (dynamicMessageContent.classList.contains('show')) {
+                    dynamicMessageContent.classList.remove('show');
+                    // Clear content after transition for a cleaner state
                     setTimeout(() => {
-                        globalMessageContainer.innerHTML = '';
-                    }, 500); 
+                        dynamicMessageContent.innerHTML = '';
+                    }, 500); // Match this with your CSS transition duration
                 }
             }
 
-            // Función para mostrar/ocultar el contenedor global y la sección de servicios
-            function toggleGlobalMessage(contentToShow) {
-                const isCurrentlyShowing = globalMessageContainer.classList.contains('show');
-                const currentContentHtml = globalMessageContainer.innerHTML.replace(/\s/g, ''); 
-                const newContentHtml = contentToShow.replace(/\s/g, ''); 
+            // Function to set content and toggle visibility
+            function toggleMessage(contentToShow) {
+                const isCurrentlyShowing = dynamicMessageContent.classList.contains('show');
+                const currentContent = dynamicMessageContent.innerHTML.trim();
 
-                if (isCurrentlyShowing && currentContentHtml === newContentHtml) {
-                    closeGlobalMessageContainer(); 
-                    servicesSection.style.display = 'block'; // Mostrar la sección de servicios
+                // Check if the same content is already showing
+                if (isCurrentlyShowing && currentContent === contentToShow.trim()) {
+                    closeMessageContainer(); // If it's the same, close it
                 } else {
+                    // If something else is showing, or nothing is showing,
+                    // first hide it (if visible) then show the new content
                     if (isCurrentlyShowing) {
-                        globalMessageContainer.classList.remove('show');
-                        setTimeout(() => { 
-                            globalMessageContainer.innerHTML = contentToShow;
-                            globalMessageContainer.classList.add('show');
-                        }, 500); 
+                        dynamicMessageContent.classList.remove('show');
+                        setTimeout(() => { // Delay setting new content until after hide transition
+                            dynamicMessageContent.innerHTML = contentToShow;
+                            dynamicMessageContent.classList.add('show');
+                        }, 500); // Match CSS transition duration
                     } else {
-                        globalMessageContainer.innerHTML = contentToShow;
-                        globalMessageContainer.classList.add('show');
+                        // If nothing is showing, just set content and show
+                        dynamicMessageContent.innerHTML = contentToShow;
+                        dynamicMessageContent.classList.add('show');
                     }
-                    servicesSection.style.display = 'none'; // Ocultar la sección de servicios
                 }
             }
 
             // --- Event Listeners ---
             homeLink.addEventListener('click', function(event) {
-                event.preventDefault(); 
-                closeGlobalMessageContainer(); 
-                servicesSection.style.display = 'block'; // Asegurar que la sección de servicios se muestre
+                event.preventDefault(); // Prevent default link behavior
+                closeMessageContainer(); // Close any open message
             });
 
-            quienesSomosLink.addEventListener('click', function(event) {
-                event.preventDefault(); 
-                toggleGlobalMessage(quienesSomosText);
+            aboutUsLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
+                toggleMessage(aboutUsText);
             });
 
             contactLink.addEventListener('click', function(event) {
-                event.preventDefault(); 
-                toggleGlobalMessage(contactText);
+                event.preventDefault(); // Prevent default link behavior
+                toggleMessage(contactText);
             });
-
-            // Al cargar la página, asegura que la sección de servicios se muestre por defecto
-            if (!globalMessageContainer.classList.contains('show')) {
-                servicesSection.style.display = 'block';
-            }
         });
     </script>
-
 </body>
 </html>
