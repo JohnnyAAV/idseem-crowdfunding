@@ -1,917 +1,432 @@
-<!DOCTYPE html>
-<html lang="es">
+
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Súper Conversor y Nuestros Productos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&amp;family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet">
+    <title>Asesoría Empresarial: Tu Imperio Legal en Ecuador</title>
+    <meta charset="UTF-8"></meta>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"></meta>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"></link>
     <style>
-        /* Estilos Generales para el body y reseteos */
+        /* CSS General */
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-            background-color: #F5F7FA; /* Fondo principal para toda la página */
-            color: #333333;
-            display: flex;
-            flex-direction: column; /* Apila los elementos verticalmente */
-            align-items: center; /* Centra los elementos */
-            min-height: 100vh;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
         }
 
-        /* Estilos de la Calculadora - Adaptados para coexistir */
-        .calculator {
-            --primary-bg: #F5F7FA; /* Light background */
-            --secondary-bg: #FFFFFF; /* Card background */
-            --text-color: #333333; /* Dark text */
-            --accent-color: #007BFF; /* Blue accent */
-            --accent-hover: #0056b3; /* Darker blue for hover */
-            --border-color: #E0E0E0; /* Light border */
-            --shadow-color: rgba(0, 0, 0, 0.08); /* Subtle shadow */
-            --steps-bg: #E8F0FE; /* Light blue for steps background */
-            --remainder-color: #dc3545; /* Red for remainders */
-            --quotient-color: #007bff; /* Blue for quotients */
-            --fractional-integer-color: #6f42c1; /* Purple for fractional integers */
-
-            background-color: var(--secondary-bg);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px var(--shadow-color);
-            padding: 30px;
-            width: 100%;
-            max-width: 550px;
-            box-sizing: border-box;
-            text-align: center;
-            margin-bottom: 20px; /* Reducido para que el mensaje quede más cerca */
+        /* Encabezado */
+        .header {
+            background-color: #fff;
+            padding: 10px 20px;
+            text-align: center; /* Centrar el texto del encabezado */
+            border-bottom: 1px solid #ddd;
         }
 
-        .calculator h2 {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--accent-color);
-            font-weight: 700;
-            margin-bottom: 25px;
-            font-size: 1.8em;
-            letter-spacing: 0.5px;
+        .header h1 {
+            margin-top: 0;
+            font-size: 2.2em;
+            color: #007bff;
         }
 
-        #conversion-options {
-            margin-bottom: 25px;
+        .header p {
+            margin-top: 5px;
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 15px 20px;
             display: flex;
             justify-content: center;
-            flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
-            gap: 20px;
-        }
-
-        #conversion-options label {
-            font-weight: 600;
-            font-family: 'Montserrat', sans-serif;
-            color: var(--text-color);
-            cursor: pointer;
-            position: relative;
-            padding-left: 25px;
-            transition: color 0.2s ease;
-        }
-
-        #conversion-options input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-            height: 0;
-            width: 0;
-        }
-
-        #conversion-options label::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 18px;
-            width: 18px;
-            border: 2px solid var(--accent-color);
-            border-radius: 50%;
-            background-color: var(--secondary-bg);
-            transition: all 0.2s ease;
-        }
-
-        #conversion-options input[type="radio"]:checked + label::before {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
-        }
-
-        #conversion-options input[type="radio"]:checked + label::after {
-            content: '';
-            position: absolute;
-            left: 5px;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 8px;
-            width: 8px;
-            border-radius: 50%;
-            background-color: var(--secondary-bg);
-            opacity: 1;
-            transition: all 0.2s ease;
-        }
-
-        #decimalNumberInput {
-            width: calc(100% - 150px); /* Ajuste para escritorio */
-            padding: 12px 15px;
-            margin-right: 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1.1em;
-            font-family: 'Roboto', sans-serif;
-            color: var(--text-color);
-            outline: none;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            box-sizing: border-box;
-            max-width: 250px; /* Limita el ancho en pantallas grandes */
-        }
-
-        #decimalNumberInput:focus {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
-        }
-
-        button {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1em;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            outline: none;
-            margin-left: 5px; /* Espacio entre botones en escritorio */
-        }
-
-        button:first-of-type {
-            background-color: var(--accent-color);
-            color: var(--secondary-bg);
-        }
-
-        button:first-of-type:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
-        }
-
-        button:nth-of-type(2) {
-            background-color: var(--border-color);
-            color: var(--text-color);
-        }
-
-        button:nth-of-type(2):hover {
-            background-color: #d1d1d1;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        #toggleSpeechBtn {
-            background-color: #28a745;
-            color: white;
-            margin-top: 15px;
-            width: calc(100% - 10px); /* Ocupa casi todo el ancho */
-        }
-
-        #toggleSpeechBtn.speaking {
-            background-color: #ffc107;
-        }
-
-        #toggleSpeechBtn:hover {
-            background-color: #218838;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
-        }
-
-        #steps-container {
-            margin-top: 30px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 15px;
-            background-color: var(--primary-bg);
-            max-height: 400px;
-            overflow-y: auto;
-            text-align: left;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-
-        #steps-container h2 {
-            font-size: 1.3em;
-            color: var(--text-color);
-            text-align: center;
-            margin-top: 0;
-            margin-bottom: 15px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
-        }
-
-        #steps-container::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        #steps-container::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        #steps-container::-webkit-scrollbar-thumb {
-            background: var(--accent-color);
-            border-radius: 10px;
-        }
-
-        #steps-container::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-hover);
-        }
-
-        .step-box {
-            display: grid;
-            grid-template-columns: auto auto;
-            grid-template-rows: auto auto;
-            margin-bottom: 8px;
-            padding: 8px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            position: relative;
-            background-color: var(--secondary-bg);
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
-
-        .step-box::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            border-top: 1px solid var(--border-color);
-            transform: translateY(-50%);
-            z-index: 1;
-        }
-
-        .step-box::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 50%;
-            height: 50%;
-            border-left: 2px solid var(--text-color);
-            transform: translateX(-50%);
-            z-index: 2;
-        }
-
-        .divisor-line-horizontal-strong {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 25px;
-            border-top: 2px solid var(--text-color);
-            transform: translate(calc(-50% + 12px), -50%);
-            z-index: 2;
-        }
-
-        .dividend-box {
-            grid-column: 1 / 2;
-            grid-row: 1 / 2;
-            text-align: right;
-            padding-right: 10px;
-            font-weight: 700;
-            font-size: 1.1em;
-        }
-
-        .divisor-box {
-            grid-column: 2 / 3;
-            grid-row: 1 / 2;
-            text-align: left;
-            padding-left: 15px;
-            font-weight: 700;
-            font-size: 1.1em;
-            position: relative;
-        }
-
-        .remainder-box {
-            grid-column: 1 / 2;
-            grid-row: 2 / 3;
-            text-align: right;
-            font-weight: 700;
-            color: var(--remainder-color);
-            padding-right: 10px;
-            font-size: 1.1em;
-        }
-
-        .quotient-box {
-            grid-column: 2 / 3;
-            grid-row: 2 / 3;
-            text-align: left;
-            color: var(--quotient-color);
-            padding-left: 15px;
-            font-weight: 700;
-            font-size: 1.1em;
-        }
-
-        .fractional-steps-title {
-            margin-top: 25px;
-            margin-bottom: 15px;
-            font-weight: 700;
-            font-size: 1.2em;
-            color: var(--accent-color);
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
-        }
-
-        .multiplication-step-box {
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
-            padding: 8px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            background-color: var(--steps-bg);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            font-size: 1.1em;
-        }
-        .multiplication-step-box .expression {
-            flex-grow: 1;
-            text-align: right;
-            padding-right: 10px;
-            font-weight: 400;
-        }
-        .multiplication-step-box .result-integer {
-            font-weight: 700;
-            color: var(--fractional-integer-color);
-            margin-left: 15px;
-            padding-left: 15px;
-            border-left: 2px solid var(--border-color);
+            flex-wrap: wrap; /* Permite que los enlaces salten de línea */
         }
 
-        #result {
-            margin-top: 25px;
-            font-size: 1.4em;
-            font-weight: 700;
-            color: var(--accent-color);
-            background-color: var(--steps-bg);
-            padding: 15px;
-            border-radius: 8px;
-            border: 2px solid var(--accent-color);
-            text-align: center;
-            letter-spacing: 0.5px;
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 1em;
+            transition: color 0.3s ease;
+            padding: 5px 0;
         }
 
-        /* Mensaje de Financiación */
-        .funding-message {
-            background-color: #d4edda; /* Un verde claro para un mensaje positivo */
-            color: #155724; /* Texto verde oscuro */
-            border: 1px solid #c3e6cb;
-            border-radius: 8px;
-            padding: 15px 20px;
-            margin: 30px auto; /* Centra y da espacio */
-            max-width: 600px;
-            text-align: center;
-            font-size: 1.1em;
-            font-weight: 500;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .funding-message strong {
-            color: #0d4a1b; /* Verde más oscuro para resaltar */
+        .navbar a:hover {
+            color: #007bff;
         }
 
-
-        /* Estilos de la Sección de Productos */
-        .productos-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Mantener en escritorio */
-            gap: 20px;
-            max-width: 1200px;
-            margin: 20px auto 0 auto;
-            padding: 20px;
-            background-color: #ff8c00; /* Fondo naranja de la sección de productos */
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .productos-container h1 { /* Estilo para el título "Nuestros Productos Destacados" */
-            grid-column: 1 / -1; /* Ocupa todas las columnas */
-            text-align: center;
-            color: #fff; /* Blanco para contrastar con el fondo naranja */
-            margin-bottom: 30px;
-            font-size: 2em; /* Tamaño de fuente para escritorio */
-        }
-
-        .producto-card {
+        /* Contenedor principal de mensajes y servicios */
+        #global-message-container {
+            background-color: #fff;
             border: 1px solid #ddd;
             border-radius: 8px;
-            padding: 15px;
+            padding: 0;
+            margin: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-height: 0; /* Oculta el contenido inicialmente */
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+        }
+
+        #global-message-container.show {
+            max-height: 3000px; /* Suficiente para el contenido, ajustar si es necesario */
+            padding: 20px;
+        }
+        
+        /* Estilos generales para el contenido dentro de message-container */
+        .message-content {
+            padding: 20px; /* Añadimos padding al contenido para que no esté pegado a los bordes */
+        }
+
+        .message-content h1, .message-content h2 {
+            color: #007bff;
             text-align: center;
-            background-color: #fff; /* Fondo blanco de la tarjeta de producto */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
         }
-        .producto-card img {
-            max-width: 100%;
-            height: auto;
-            max-height: 200px;
-            border-radius: 4px;
-            margin-bottom: 10px;
-            object-fit: contain; /* Asegura que la imagen se contenga dentro del espacio */
+        
+        .message-content p {
+            text-align: justify;
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
-        .producto-card h3 {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            color: #555;
-            flex-grow: 1; /* Permite que el título ocupe el espacio disponible */
-        }
-        .producto-card .precio {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #007bff; /* Color azul para todos los precios */
-            margin-top: 10px;
+
+        .message-content ul {
+            list-style-type: none; /* Quitamos los puntos por defecto */
+            padding-left: 0;
             margin-bottom: 15px;
         }
-        .enlace-temu {
-            display: inline-block;
-            background-color: #ff8c00; /* Fondo naranja del botón */
-            color: #007bff; /* Color azul para el texto del botón */
-            padding: 10px 20px;
-            border-radius: 10px;
-            text-decoration: none;
+
+        .message-content ul li {
+            margin-bottom: 10px;
+            position: relative; /* Para el icono personalizado */
+            padding-left: 30px; /* Espacio para el icono */
+            text-align: justify;
+        }
+
+        /* Estilo para el icono de check en las listas (QUIENES SOMOS) */
+        .message-content ul li .icon-check {
+            color: #28a745; /* Color verde */
             font-weight: bold;
-            transition: background-color 0.3s ease;
-            margin-top: auto; /* Empuja el botón hacia abajo si el contenido del card varía */
-        }
-        .enlace-temu:hover {
-            background-color: #e67e00; /* Naranja un poco más oscuro al pasar el mouse */
-            text-decoration: none;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.2em; /* Tamaño del icono */
         }
 
-
-        /* Media Queries para responsividad */
-        @media (max-width: 768px) { /* Tabletas y móviles */
-            body {
-                padding: 15px;
-            }
-            .calculator {
-                padding: 20px;
-            }
-            .calculator h2 {
-                font-size: 1.6em;
-            }
-            #conversion-options {
-                flex-direction: column; /* Apila las opciones de radio */
-                gap: 15px; /* Espacio entre opciones apiladas */
-                align-items: flex-start; /* Alinea las etiquetas a la izquierda */
-            }
-            #decimalNumberInput {
-                width: 100%; /* Ocupa todo el ancho */
-                margin-right: 0;
-                margin-bottom: 15px; /* Espacio antes de los botones */
-                max-width: none; /* Elimina la restricción de ancho máximo */
-            }
-            button {
-                width: calc(50% - 7.5px); /* Divide el ancho en 2 botones con espacio */
-                margin-left: 0;
-                margin-right: 15px; /* Espacio entre los dos primeros botones */
-                margin-bottom: 10px; /* Espacio debajo de los botones */
-            }
-            button:nth-of-type(2) { /* Ajusta el margen del segundo botón */
-                margin-right: 0;
-            }
-            #toggleSpeechBtn {
-                width: 100%; /* Ocupa todo el ancho */
-                margin-left: 0;
-                margin-right: 0;
-            }
-            #steps-container h2, .fractional-steps-title {
-                font-size: 1.2em;
-            }
-            .dividend-box, .divisor-box, .remainder-box, .quotient-box, .multiplication-step-box {
-                font-size: 1em;
-            }
-            #result {
-                font-size: 1.2em;
-                padding: 12px;
-            }
-
-            /* Responsive para Productos */
-            .productos-container {
-                padding: 15px;
-                gap: 15px;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Permite 1 o 2 columnas según el ancho */
-            }
-            .productos-container h1 {
-                font-size: 1.8em;
-                margin-bottom: 20px;
-            }
-            .producto-card h3 {
-                font-size: 1.1em;
-            }
-            .producto-card .precio {
-                font-size: 1.3em;
-            }
-            .enlace-temu {
-                padding: 8px 15px;
-                font-size: 0.9em;
-            }
-            .funding-message {
-                font-size: 1em;
-                padding: 12px 18px;
-                margin: 25px auto;
-            }
+        .message-content strong {
+            color: #e74c3c; 
         }
 
-        @media (max-width: 480px) { /* Móviles más pequeños */
-            body {
-                padding: 10px;
-            }
-            .calculator {
-                padding: 15px;
-            }
-            .calculator h2 {
-                font-size: 1.4em;
-                margin-bottom: 20px;
-            }
-            #decimalNumberInput {
-                font-size: 1em;
-                padding: 10px;
-            }
-            button {
-                width: 100%; /* Botones apilados verticalmente */
-                margin-left: 0;
-                margin-right: 0;
-                margin-bottom: 10px; /* Espacio entre botones apilados */
-            }
-            #toggleSpeechBtn {
-                margin-top: 10px;
-                margin-bottom: 0; /* No hay más botones debajo */
-            }
-            #steps-container {
-                margin-top: 20px;
-                padding: 10px;
-            }
-            #steps-container h2, .fractional-steps-title {
-                font-size: 1.05em;
-            }
-            .dividend-box, .divisor-box, .remainder-box, .quotient-box, .multiplication-step-box {
-                font-size: 0.95em;
-                padding: 6px;
-            }
-            .multiplication-step-box .expression, .multiplication-step-box .result-integer {
-                font-size: 0.9em;
-            }
-            #result {
-                font-size: 1.1em;
-                padding: 10px;
-            }
+        /* Estilos para el logo y texto del encabezado */
+        /* Eliminamos las reglas de .header .separator y .header .separator img si el nuevo logo ya maneja su centrado */
+        .header .separator {
+            /* Los estilos de centrado ya están en el div del logo */
+            /* Puedes ajustar el margen o padding aquí si es necesario para el espaciado del logo */
+        }
+        /* Eliminar br y p que añade espacio innecesario en el código del logo */
+        .header > p, .header > br {
+            display: none;
+        }
 
-            /* Responsive para Productos - Móviles muy pequeños */
-            .productos-container {
-                padding: 10px;
-                gap: 10px;
-                grid-template-columns: 1fr; /* Una sola columna en pantallas muy pequeñas */
+
+        /* Sección de Servicios (para INICIO) */
+        .services-section {
+            padding: 20px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: none; /* Inicialmente oculto, se muestra con JS */
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Columnas responsivas */
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .service-card {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card h3 {
+            color: #007bff;
+            margin-top: 0;
+            font-size: 1.4em;
+            border-bottom: 1px dashed #d0d0d0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex; /* Para alinear el ícono con el texto */
+            align-items: center;
+        }
+
+        .service-card h3 .icon { /* Estilo para los íconos de Font Awesome */
+            margin-right: 10px;
+            font-size: 1.2em;
+            color: #007bff; /* Color del ícono */
+        }
+
+        .service-card p {
+            font-size: 0.95em;
+            line-height: 1.5;
+            color: #666;
+            text-align: justify;
+        }
+
+        /* Restablecemos el comportamiento predeterminado de los bullets */
+        .service-card ul {
+            list-style-type: disc; /* Vuelve a los bullets de disco estándar */
+            padding-left: 20px; /* Agrega padding para que los bullets sean visibles */
+            margin-top: 15px;
+        }
+
+        .service-card ul li {
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            color: #444;
+            text-align: justify;
+        }
+
+        /* Estilos para el footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+        
+        /* Media queries para responsividad */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
             }
-            .productos-container h1 {
-                font-size: 1.6em;
-                margin-bottom: 15px;
+            .navbar a {
+                margin: 10px 0;
             }
-            .producto-card {
-                padding: 10px;
-            }
-            .producto-card h3 {
-                font-size: 1em;
-            }
-            .producto-card .precio {
-                font-size: 1.2em;
-            }
-            .enlace-temu {
-                padding: 7px 12px;
-                font-size: 0.85em;
-            }
-            .funding-message {
-                font-size: 0.9em;
-                padding: 10px 15px;
-                margin: 20px auto;
+            .services-grid {
+                grid-template-columns: 1fr; /* Una columna en móviles */
             }
         }
     </style>
 </head>
 <body>
-    <div class="calculator">
-        <h2>Súper Conversor de Bases Numéricas</h2>
-        <div id="conversion-options">
-            <input checked="" id="toBinary" name="conversionType" type="radio" value="2" />
-            <label for="toBinary">Binario</label>
-            <input id="toOctal" name="conversionType" type="radio" value="8" />
-            <label for="toOctal">Octal</label>
-            <input id="toHexadecimal" name="conversionType" type="radio" value="16" />
-            <label for="toHexadecimal">Hexadecimal</label>
+
+    <div class="header">
+        <p></p>
+        <div class="separator" style="clear: both; text-align: center;">
+            <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi_GuMR21QfsR0XqYBIzkrTGZLVX0FVMNAp_N_GK5OztdJ0RCbTUgvOKWFteBpefv3Bc4cJm10bmnhbQ9CKf-s2dh5Tg8wgLIE2vp9WZmb6JfXE8yGmrCl2n_By90M_WnNvPgKa9QQGzkvw5AbMh-jgpXQt-6b75k3wgrVhx1zpGuGgt1gQGoq7RN8WJKr1/s1536/assets_task_01jw7p5y4pfekszdywzb57gaqt_1748309906_img_3.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">
+                <img alt="logo" border="0" data-original-height="799" data-original-width="1536" height="116" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4QN_Z1uXk8GMbOl5AUONtfzuo2ze6qfhmgMQbxOgtqdQkeOtEPf9ZK_zH5UAJHoP2IMA18FC13gg_v4sPY5ilpErn3h7-OYP2pNdYLRbXyACrp4mdGOTiyqQo_-hG69M2frgc5oR58x8KcxrDuV1tyAwd9m2yggifbnsVMX_f5Ljb1tQSJX-y63XBNc54/s200/assets_task_01jw7p5y4pfekszdywzb57gaqt_1748309906_img_3.png" width="320" />
+            </a>
         </div>
-        <input id="decimalNumberInput" placeholder="Ej: 5.125 o 2855" type="text" />
-        <button onclick="convertNumber()">Convertir</button>
-        <button onclick="clearCalculator()">Limpiar</button>
-        <button id="toggleSpeechBtn" onclick="toggleSpeech()">Activar Narrador</button>
-        <div id="steps-container">
-            <h2>Pasos de la Conversión:</h2>
-            <div id="conversionSteps"></div>
-            <div id="result"></div>
-        </div>
+        <br />
+        <div class="separator" style="clear: both; text-align: center;"><br /></div>
+        <br />
+        <h1>CONSULTORA LEGAL EMPRESARIAL.</h1>
+        <p>Acompañamiento para compañías en Ecuador.</p>
     </div>
 
-    <div class="funding-message">
-        ¡Tu apoyo es fundamental! El desarrollo y mantenimiento de esta calculadora se financia a través de las compras que realizas en Temu utilizando los enlaces que encontrarás justo debajo. <strong>Cada compra nos ayuda a seguir mejorando y añadiendo nuevas funciones. ¡Gracias!</strong>
+    <div class="navbar">
+        <a href="#" id="home-link">INICIO</a>
+        <a href="#" id="quienes-somos-link">QUIENES SOMOS</a>
+        <a href="#" id="contact-link">CONTACTO</a>
     </div>
 
-    <div class="productos-container">
-        <h1>Nuestros Productos Destacados</h1>
+    <div class="services-section" id="services-section">
+        <h2>Impulsa tu Visión: Nuestros Servicios Legales Empresariales</h2>
+        <p>En el dinámico entorno empresarial ecuatoriano, contar con una asesoría legal sólida es la clave para el éxito. En colaboración con expertos abogados, ofrecemos un portafolio integral de servicios diseñado para blindar tu negocio y asegurar su crecimiento.</p>
+        
+        <div class="services-grid">
+            
+            <div class="service-card">
+                <h3><i class="fas fa-building icon"></i> Fundación Sólida: Constitución de Empresas</h3>
+                <p>Convertimos tu idea en una realidad legal. Te asesoramos en la elección de la estructura societaria ideal (S.A., S.R.L., S.P.A., etc.), y gestionamos todo el proceso de registro ante la Superintendencia de Compañías y obtención de permisos.</p>
+                <ul>
+                    <li>Elección del tipo societario y redacción de estatutos.</li>
+                    <li>Registro ante entidades correspondientes.</li>
+                    <li>Obtención de RUC y permisos iniciales.</li>
+                </ul>
+            </div>
 
-        <div class="producto-card">
-            <h3>8 Piezas de Hélices Plegables E88</h3>
-            <img src="https://img.kwcdn.com/product/open/2b296eb346384e5b92cab5529e006196-goods.jpeg?imageView2/2/w/800/q/70/format/webp" alt="Hélices Plegables E88">
-            <p class="precio">$2,82</p>
-            <a href="https://app.temu.com/m/fokazru6rv6" target="_blank" class="enlace-temu">Ver en Temu</a>
+            <div class="service-card">
+                <h3><i class="fas fa-handshake icon"></i> Estrategia de Crecimiento: Compra y Venta de Compañías</h3>
+                <p>Navega con seguridad en el mercado de fusiones y adquisiciones. Ofrecemos asesoría legal completa para la compraventa de acciones o participaciones, incluyendo auditorías legales (Due Diligence) para identificar y mitigar riesgos.</p>
+                <ul>
+                    <li>Asesoría en adquisición/venta de acciones.</li>
+                    <li>Auditoría legal (Due Diligence).</li>
+                    <li>Negociación y redacción de contratos.</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3><i class="fas fa-chart-line icon"></i> Adaptación y Evolución: Reformas Societarias</h3>
+                <p>Tu empresa crece y cambia, y su estructura legal debe hacerlo también. Te apoyamos en reformas estatutarias, aumento o disminución de capital, cambios de objeto social, denominación o domicilio, y reorganizaciones empresariales.</p>
+                <ul>
+                    <li>Modificación de estatutos y capital.</li>
+                    <li>Cambios de objeto, nombre o domicilio.</li>
+                    <li>Fusiones, escisiones y transformaciones.</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3><i class="fas fa-file-contract icon"></i> Contratos Inteligentes: Asesoría Mercantil y Civil</h3>
+                <p>La base de toda relación comercial son los contratos. Protegemos tus intereses con la redacción y revisión de contratos comerciales, acuerdos de confidencialidad y no competencia, y contratos de arrendamiento corporativos.</p>
+                <ul>
+                    <li>Elaboración y revisión de contratos comerciales.</li>
+                    <li>Acuerdos de confidencialidad y no competencia.</li>
+                    <li>Contratos de arrendamiento para empresas.</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3><i class="fas fa-users-cog icon"></i> Armonía Laboral: Gestión de Recursos Humanos</h3>
+                <p>Cumple con la normativa laboral ecuatoriana y fomenta un ambiente de trabajo justo. Asesoramos en la elaboración de contratos, reglamentos internos, procesos de despidos y renuncias, y representamos a tu empresa ante el Ministerio de Trabajo.</p>
+                <ul>
+                    <li>Contratos de trabajo y reglamentos internos.</li>
+                    <li>Asesoría en despidos y liquidaciones.</li>
+                    <li>Representación ante autoridades laborales.</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3><i class="fas fa-lightbulb icon"></i> Innovación Segura: Propiedad Intelectual</h3>
+                <p>Protege el valor intangible de tu empresa. Gestionamos el registro de marcas, nombres comerciales y patentes, además de ofrecer asesoría en derechos de autor y contratos de licencia para tus innovaciones.</p>
+                <ul>
+                    <li>Registro de marcas y patentes.</li>
+                    <li>Protección de derechos de autor.</li>
+                    <li>Contratos de licencia y tecnología.</li>
+                </ul>
+            </div>
+            
         </div>
+        <p style="margin-top: 30px; text-align: center;">¡Tu éxito es nuestra prioridad! Contáctanos para una asesoría personalizada.</p>
+    </div>
 
-        <div class="producto-card">
-            <h3>Drone Inteligente E88 PRO</h3>
-            <img src="https://img.kwcdn.com/product/fancy/64a879aa-9c3b-4927-bba8-9f012667632a.jpg?imageView2/2/w/1300/q/90/format/webp" alt="Drone Inteligente E88 PRO">
-            <p class="precio">$17,99</p>
-            <a href="https://app.temu.com/m/f0r4zwp6n0u" target="_blank" class="enlace-temu">Ver en Temu</a>
-        </div>
+    <div class="message-container" id="global-message-container"></div>
 
-        <div class="producto-card">
-            <h3>Teclado y mouse inalámbricos</h3>
-            <img src="https://img.kwcdn.com/product/1f79705598/ec7590d1-5055-4042-9466-05081589db02_1000x1000.jpeg?imageView2/2/w/1300/q/90/format/webp" alt="Teclado y mouse inalámbricos">
-            <p class="precio">$20,00</p>
-            <a href="https://app.temu.com/m/f00ajhh91tc" target="_blank" class="enlace-temu">Ver en Temu</a>
-        </div>
-
-        <div class="producto-card">
-            <h3>Reloj inteligente, pantalla táctil completa.</h3>
-            <img src="https://img.kwcdn.com/product/fancy/86cd58a0-6254-4fc5-8e8c-177d68db4bca.jpg?imageView2/2/w/1300/q/90/format/webp" alt="Reloj inteligente">
-            <p class="precio">$11,99</p>
-            <a href="https://app.temu.com/m/fdg4wgkd4ug" target="_blank" class="enlace-temu">Ver en Temu</a>
-        </div>
-
-        <div class="producto-card">
-            <h3>Kit de inicio para principiantes Arduino</h3>
-            <img src="https://img.kwcdn.com/product/fancy/d97b513c-a155-4a1e-8652-01ad24553795.jpg?imageView2/2/w/1300/q/90/format/webp" alt="Kit de inicio Arduino">
-            <p class="precio">$19,58</p>
-            <a href="https://app.temu.com/m/fzt53gf8doi" target="_blank" class="enlace-temu">Ver en Temu</a>
-        </div>
-
-        <div class="producto-card">
-            <h3>Modulo de Controlador de Motor Servo PWM de 16 Canales.</h3>
-            <img src="https://img.kwcdn.com/product/fancy/1ca406d9-4733-4414-8cad-ddccc46c7029.jpg?imageView2/2/w/1300/q/90/format/webp" alt="Modulo de Controlador de Motor Servo PWM">
-            <p class="precio">$4,42</p>
-            <a href="https://app.temu.com/m/ftj2ebtk1mj" target="_blank" class="enlace-temu">Ver en Temu</a>
-        </div>
-
-        <div class="producto-card">
-            <h3>Disco Duro Externo Portátil USB 3.0 de 160GB/250GB/320GB/500GB</h3>
-            <img src="https://img.kwcdn.com/product/fancy/ae485586-e433-46c4-9fc4-3e45cbe41809.jpg?imageView2/2/w/1300/q/90/format/webp" alt="Disco Duro Externo Portátil">
-            <p class="precio">$12,64</p>
-            <a href="https://app.temu.com/m/f6ntryyhc0j" target="_blank" class="enlace-temu">Ver en Temu</a>
-        </div>
-
-        <div class="producto-card">
-            <h3>Trípode De Seguimiento Facial Automático, Sin Necesidad De Aplicación.</h3>
-            <img src="https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/3e687d509a18d9904abd66d9c2eb988a.jpg?imageView2/2/w/1300/q/90/format/webp" alt="Trípode De Seguimiento Facial Automático">
-            <p class="precio">$16,14</p>
-            <a href="https://app.temu.com/m/fkqfvumn618" target="_blank" class="enlace-temu">Ver en Temu</a>
-        </div>
-
+    <div class="footer">
+        <p>© 2025 Asesoría Empresarial. Todos los derechos reservados.</p>
+        <p>Ubicados en Manta, Manabí, Ecuador.</p>
     </div>
 
     <script>
-        const synth = window.speechSynthesis;
-        let speechEnabled = false;
-        let currentUtterance = null;
+        document.addEventListener('DOMContentLoaded', function() {
+            const homeLink = document.getElementById('home-link');
+            const quienesSomosLink = document.getElementById('quienes-somos-link');
+            const contactLink = document.getElementById('contact-link');
+            const globalMessageContainer = document.getElementById('global-message-container');
+            const servicesSection = document.getElementById('services-section');
 
-        function speak(text) {
-            if (synth.speaking) {
-                synth.cancel();
-            }
-            if (speechEnabled) {
-                currentUtterance = new SpeechSynthesisUtterance(text);
-                currentUtterance.lang = 'es-ES';
-                synth.speak(currentUtterance);
-            }
-        }
+            // Contenido de "QUIENES SOMOS" actualizado
+            const quienesSomosText = `
+                <div class="message-content">
+                    <h2>Quienes Somos: Tu Socio Estratégico para el Éxito Legal Empresarial</h2>
+                    <p>En nuestra plataforma, somos el puente que conecta a tu visión empresarial con la solidez legal que necesita. Actuamos como promotores y facilitadores de una oficina de abogados líder en <strong>asesoría empresarial, constitución y venta de compañías en Ecuador</strong>.</p>
+                    <p>Nuestra misión es simplificar el complejo mundo legal para emprendedores, pymes y grandes corporaciones, garantizando que cada paso de tu negocio esté respaldado por el conocimiento y la experiencia de profesionales jurídicos altamente calificados. No somos solo un directorio, somos tu punto de partida para construir un imperio legal y exitoso en Ecuador.</p>
+                    <h3>Nuestra Propuesta de Valor:</h3>
+                    <ul>
+                        <li><span class="icon-check">✓</span> <strong>Acceso Directo a Expertos:</strong> Te conectamos con abogados especializados en derecho corporativo, mercantil, laboral y de propiedad intelectual, listos para atender tus necesidades específicas.</li>
+                        <li><span class="icon-check">✓</span> <strong>Claridad y Eficiencia:</strong> Presentamos los servicios legales de forma clara y accesible, para que tomes decisiones informadas sin jerga legal confusa.</li>
+                        <li><span class="icon-check">✓</span> <strong>Soporte Integral:</strong> Desde la constitución de tu empresa hasta la gestión de contratos y resolución de conflictos, te acompañamos en cada etapa del ciclo de vida de tu negocio.</li>
+                        <li><span class="icon-check">✓</span> <strong>Actualización Constante:</strong> Nos mantenemos al tanto de las últimas novedades legales en Ecuador para ofrecerte siempre la información más relevante y precisa.</li>
+                    </ul>
+                    <p>Confiamos en la experiencia de nuestros abogados asociados para ser el aliado estratégico que tu empresa merece. ¡Tu imperio legal comienza aquí!</p>
+                </div>
+            `;
 
-        function toggleSpeech() {
-            speechEnabled = !speechEnabled;
-            const toggleBtn = document.getElementById('toggleSpeechBtn');
-            if (speechEnabled) {
-                toggleBtn.textContent = 'Desactivar Narrador';
-                toggleBtn.classList.add('speaking');
-                speak("Narrador activado. Ahora leeré los pasos de la conversión.");
-            } else {
-                synth.cancel();
-                toggleBtn.textContent = 'Activar Narrador';
-                toggleBtn.classList.remove('speaking');
-                speak("Narrador desactivado.");
-            }
-        }
-
-        function convertNumber() {
-            if (synth.speaking) {
-                synth.cancel();
-            }
-
-            const decimalNumberStr = document.getElementById("decimalNumberInput").value.trim();
-            const conversionStepsDiv = document.getElementById("conversionSteps");
-            const resultDiv = document.getElementById("result");
-
-            let base;
-            let baseName;
-            let resultLabel;
-
-            const radios = document.getElementsByName('conversionType');
-            for (const radio of radios) {
-                if (radio.checked) {
-                    base = parseInt(radio.value);
-                    baseName = radio.labels[0].textContent;
-                    resultLabel = `Resultado ${baseName} (de abajo hacia arriba para la entera, de arriba hacia abajo para la fraccionaria):`;
-                    break;
+            const contactText = `
+                <div class="message-content">
+                    <h2>Contacto</h2>
+                    <p>¡Nos encantaría saber de ti! Puedes contactarnos a través de:</p>
+                    <ul>
+                        <li><span class="icon-check">✓</span> Email: jaavjohnny@gmail.com</li>
+                        <li><span class="icon-check">✓</span> Teléfono: 099 052 1316</li>
+                        <li><span class="icon-check">✓</span> Ubicación: Operamos en Todo el Ecuador. Contáctanos para una cita en nuestra oficina asociada.</li>
+                        
+                    <p>Tu mensaje es importante para nosotros y responderemos lo antes posible.</p>
+                </div>
+            `;
+            
+            // Función para cerrar el contenedor global (Quienes Somos/Contacto)
+            function closeGlobalMessageContainer() {
+                if (globalMessageContainer.classList.contains('show')) {
+                    globalMessageContainer.classList.remove('show');
+                    setTimeout(() => {
+                        globalMessageContainer.innerHTML = '';
+                    }, 500); 
                 }
             }
 
-            if (decimalNumberStr === "") {
-                const message = "Por favor, ingresa un número decimal.";
-                alert(message);
-                speak(message);
-                return;
-            }
+            // Función para mostrar/ocultar el contenedor global y la sección de servicios
+            function toggleGlobalMessage(contentToShow) {
+                const isCurrentlyShowing = globalMessageContainer.classList.contains('show');
+                const currentContentHtml = globalMessageContainer.innerHTML.replace(/\s/g, ''); 
+                const newContentHtml = contentToShow.replace(/\s/g, ''); 
 
-            const parts = decimalNumberStr.split('.');
-            let integerPart = 0;
-            let fractionalPart = 0;
-
-            if (parts.length > 2) {
-                const message = "Formato de número decimal inválido. Solo se permite un punto decimal.";
-                alert(message);
-                speak(message);
-                return;
-            }
-
-            if (parts[0] !== "") {
-                integerPart = parseInt(parts[0]);
-                if (isNaN(integerPart) || integerPart < 0) {
-                    const message = "La parte entera debe ser un número entero positivo o cero.";
-                    alert(message);
-                    speak(message);
-                    return;
+                if (isCurrentlyShowing && currentContentHtml === newContentHtml) {
+                    closeGlobalMessageContainer(); 
+                    servicesSection.style.display = 'block'; // Mostrar la sección de servicios
+                } else {
+                    if (isCurrentlyShowing) {
+                        globalMessageContainer.classList.remove('show');
+                        setTimeout(() => { 
+                            globalMessageContainer.innerHTML = contentToShow;
+                            globalMessageContainer.classList.add('show');
+                        }, 500); 
+                    } else {
+                        globalMessageContainer.innerHTML = contentToShow;
+                        globalMessageContainer.classList.add('show');
+                    }
+                    servicesSection.style.display = 'none'; // Ocultar la sección de servicios
                 }
-            } else {
-                integerPart = 0;
             }
 
-            if (parts.length === 2 && parts[1] !== "") {
-                const tempFractionalStr = "0." + parts[1];
-                fractionalPart = parseFloat(tempFractionalStr);
-                if (isNaN(fractionalPart) || fractionalPart < 0) {
-                    const message = "La parte fraccionaria no es válida. Asegúrate que solo contiene dígitos.";
-                    alert(message);
-                    speak(message);
-                    return;
-                }
-                if (parts[1] !== "" && isNaN(parseInt(parts[1]))) {
-                    const message = "La parte fraccionaria no es válida. Asegúrate que solo contiene dígitos.";
-                    alert(message);
-                    speak(message);
-                    return;
-                }
+            // --- Event Listeners ---
+            homeLink.addEventListener('click', function(event) {
+                event.preventDefault(); 
+                closeGlobalMessageContainer(); 
+                servicesSection.style.display = 'block'; // Asegurar que la sección de servicios se muestre
+            });
 
-            } else if (parts.length === 2 && parts[1] === "") {
-                fractionalPart = 0;
+            quienesSomosLink.addEventListener('click', function(event) {
+                event.preventDefault(); 
+                toggleGlobalMessage(quienesSomosText);
+            });
+
+            contactLink.addEventListener('click', function(event) {
+                event.preventDefault(); 
+                toggleGlobalMessage(contactText);
+            });
+
+            // Al cargar la página, asegura que la sección de servicios se muestre por defecto
+            if (!globalMessageContainer.classList.contains('show')) {
+                servicesSection.style.display = 'block';
             }
-
-            const hexChars = "0123456789ABCDEF";
-            function getDigitChar(digit) {
-                return hexChars[digit];
-            }
-
-            function formatFloatForDisplay(num) {
-                let str = num.toString();
-                if (str.includes('.') && str.split('.')[1].length > 12) {
-                    str = num.toFixed(12);
-                }
-                str = str.replace(/(\.\d*?[1-9])0+$/, '$1');
-                str = str.replace(/\.0+$/, '');
-                return str;
-            }
-
-            const integerStepsHTML = [];
-            const convertedIntegerDigits = [];
-            let currentInteger = integerPart;
-            let speechText = "Iniciando conversión. ";
-
-            speechText += `Parte entera: ${integerPart}. `;
-
-            if (currentInteger === 0) {
-                integerStepsHTML.push(`
-                    <div class="step-box">
-                        <div class="dividend-box">0</div>
-                        <div class="divisor-box">${base}</div>
-                        <div class="remainder-box">0</div>
-                        <div class="quotient-box">0</div>
-                        <div class="divisor-line-horizontal-strong"></div>
-                    </div>
-                `);
-                convertedIntegerDigits.push("0");
-                speechText += `El número es cero, la parte entera convertida es cero. `;
-            } else {
-                speechText += `Dividiendo la parte entera ${integerPart} entre la base ${base}. `;
-                let stepNumber = 1;
-                while (currentInteger > 0) {
-                    const remainder = currentInteger % base;
-                    const quotient = Math.floor(currentInteger / base);
-                    const numStr = String(currentInteger);
-                    let displayRemainder = getDigitChar(remainder);
-
-                    integerStepsHTML.push(`
-                        <div class="step-box">
-                            <div class="dividend-box">${numStr}</div>
-                            <div class="divisor-box">${base}</div>
-                            <div class="remainder-box">${displayRemainder}</div>
-                            <div class="quotient-box">${quotient}</div>
-                            <div class="divisor-line-horizontal-strong"></div>
-                        </div>
-                    `);
-                    convertedIntegerDigits.unshift(displayRemainder);
-                    speechText += `Paso ${stepNumber}: ${numStr} dividido por ${base} es ${quotient} con un residuo de ${displayRemainder}. `;
-                    currentInteger = quotient;
-                    stepNumber++;
-                }
-                speechText += `La parte entera convertida, leyendo los residuos de abajo hacia arriba, es ${convertedIntegerDigits.join("")}. `;
-            }
-
-            let fullConvertedResult = convertedIntegerDigits.join("");
-            let fractionalStepsHTML = [];
-            let convertedFractionalDigits = [];
-
-            if (fractionalPart > 0) {
-                fractionalStepsHTML.push('<div class="fractional-steps-title">Pasos de la Parte Fraccionaria:</div>');
-                speechText += `Ahora, la parte fraccionaria: ${formatFloatForDisplay(fractionalPart)}. `;
-
-                let currentFractional = fractionalPart;
-                let iterationCount = 0;
-                const MAX_ITERATIONS = 25;
-                const EPSILON = 1e-9;
-
-                speechText += `Multiplicando la parte fraccionaria por la base ${base}. `;
-                let fracStepNumber = 1;
-
-                while (currentFractional > EPSILON && iterationCount < MAX_ITERATIONS) {
-                    const prevFractionalDisplay = formatFloatForDisplay(currentFractional);
-                    currentFractional *= base;
-                    const integerDigit = Math.floor(currentFractional);
-                    const displayDigit = getDigitChar(integerDigit);
-
-                    fractionalStepsHTML.push(`
-                        <div class="multiplication-step-box">
-                            <div class="expression">${prevFractionalDisplay} x ${base} = ${formatFloatForDisplay(currentFractional)}</div>
-                            <div class="result-integer">${displayDigit}</div>
-                        </div>
-                    `);
-
-                    convertedFractionalDigits.push(displayDigit);
-                    speechText += `Paso ${fracStepNumber}: ${prevFractionalDisplay} multiplicado por ${base} es igual a ${formatFloatForDisplay(currentFractional)}. El dígito entero es ${displayDigit}. `;
-                    currentFractional -= integerDigit;
-                    iterationCount++;
-                    fracStepNumber++;
-                }
-                if (convertedFractionalDigits.length > 0) {
-                    fullConvertedResult += "." + convertedFractionalDigits.join("");
-                    speechText += `La parte fraccionaria convertida, leyendo los dígitos de arriba hacia abajo, es punto ${convertedFractionalDigits.join("")}. `;
-                }
-            } else if (decimalNumberStr.endsWith('.') && parts.length === 2) {
-                fullConvertedResult += ".";
-                speechText += `La parte fraccionaria es cero. `;
-            }
-
-            conversionStepsDiv.innerHTML = integerStepsHTML.join("") + fractionalStepsHTML.join("");
-            const finalResultText = `${resultLabel} ${fullConvertedResult}`;
-            resultDiv.textContent = finalResultText;
-            speechText += `El resultado final es ${fullConvertedResult}.`;
-            speak(speechText);
-        }
-
-        function clearCalculator() {
-            if (synth.speaking) {
-                synth.cancel();
-            }
-            document.getElementById("decimalNumberInput").value = "";
-            document.getElementById("conversionSteps").innerHTML = "";
-            document.getElementById("result").textContent = "";
-            document.getElementById("toBinary").checked = true;
-            if (speechEnabled) {
-                speak("Calculadora limpiada. Por favor, ingresa un nuevo número.");
-            }
-        }
+        });
     </script>
+
 </body>
 </html>
